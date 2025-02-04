@@ -36,8 +36,8 @@ class GameController extends Controller
 
         if ($request->hasFile('image')) {
             // Menggunakan storeAs dengan hashName
-            $image = $request->file('image');
-            $imagePath = $image->storeAs('public/games', $image->hashName());
+            $imagePath = $request->file('image')->store('games', 'public');
+            // $this->request->file('Image')->store('/Absensi/Overtime In/'.$now->toDateString(), 'public'),
 
             $game = Game::create([
                 'image' => $imagePath,  // Menyimpan path gambar

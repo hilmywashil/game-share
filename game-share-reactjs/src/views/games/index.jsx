@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import api from '../../api';
 
 import { Link } from 'react-router-dom';
+import apiConfig from '../../api/apiConfig';
 
 export default function GameIndex() {
 
@@ -35,7 +36,12 @@ export default function GameIndex() {
                                     <tr>
                                         <th scope="col">Image</th>
                                         <th scope="col">name</th>
-                                        <th scope="col">size</th>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">Size</th>
+                                        <th scope="col">Release Date</th>
+                                        <th scope="col">Publisher</th>
+                                        <th scope="col">Genre</th>
+                                        <th scope="col">Console</th>
                                         <th scope="col" style={{ 'width': '15%' }}>Actions</th>
                                     </tr>
                                 </thead>
@@ -45,10 +51,15 @@ export default function GameIndex() {
                                             ? games.map((g, index) => (
                                                 <tr key={index}>
                                                     <td className='text-center'>
-                                                        <img src={g.image} alt={g.name} width="200" className='rounded' />
+                                                        <img src={apiConfig.baseUrl+'/storage/'+g.image} alt={g.name} width="200" className='rounded' />
                                                     </td>
                                                     <td>{g.name}</td>
+                                                    <td>{g.description}</td>
                                                     <td>{g.size}</td>
+                                                    <td>{g.release_date ?? 'NULL'}</td>
+                                                    <td>{g.publisher.name}</td>
+                                                    <td>{g.genre.name}</td>
+                                                    <td>{g.console.name}</td>
                                                     <td className="text-center">
                                                         <Link to={`/games/edit/${g.id}`} className="btn btn-sm btn-primary rounded-sm shadow border-0 me-2">EDIT</Link>
                                                         <button className="btn btn-sm btn-danger rounded-sm shadow border-0">DELETE</button>
