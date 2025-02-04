@@ -5,7 +5,7 @@ export default function PostEdit() {
                 <div className="col-md-12">
                     <div className="card border-0 rounded shadow">
                         <div className="card-body">
-                            HALAMAN POST EDIT
+                            HALAMAN GAME EDIT
                         </div>
                     </div>
                 </div>

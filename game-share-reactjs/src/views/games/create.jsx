@@ -5,7 +5,7 @@ export default function PostCreate() {
                 <div className="col-md-12">
                     <div className="card border-0 rounded shadow">
                         <div className="card-body">
-                            HALAMAN POST CREATE
+                            HALAMAN GAME CREATE
                         </div>
                     </div>
                 </div>
