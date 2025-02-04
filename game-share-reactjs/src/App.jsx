@@ -1,50 +1,62 @@
-//import Link from react router dom
+// Import Link dari React Router
 import { Link } from "react-router-dom";
 
-//import routes
-import Routes from './routes';
+// Import Routes
+import Routes from "./routes";
 
 export default function App() {
-
   return (
     <>
-      <div>
-        <nav className="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
-          <div className="container">
-            <Link to="/" className="navbar-brand">HOME</Link>
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span className="navbar-toggler-icon"></span>
-            </button>
-            <div className="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                <li className="nav-item">
-                  <Link to="/games" className="nav-link active" aria-current="page">GAMES</Link>
-                </li>
-              </ul>
-              <ul className="navbar-nav ms-auto mb-2 mb-lg-0" role="search">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div className="container">
+          {/* Brand/Home Link */}
+          <Link to="/" className="navbar-brand fw-bold">
+            HOME
+          </Link>
+
+          {/* Toggle Button for Mobile */}
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+
+          {/* Navbar Items */}
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <ul className="navbar-nav me-auto">
+              <li className="nav-item">
+                <Link to="/games" className="nav-link">
+                  GAMES
+                </Link>
+              </li>
+            </ul>
+
+            {/* Instagram Button */}
+            <ul className="navbar-nav ms-auto">
+              <li className="nav-item">
                 <a
-                  href="https://santrikoding.com"
+                  href="https://instagram.com/hilmygoodboy_"
                   target="_blank"
-                  className="btn btn-success"
-                >SANTRIKODING.COM</a
+                  rel="noopener noreferrer"
+                  className="btn btn-success fw-semibold px-3"
+                  style={{ transition: "0.3s" }}
                 >
-              </ul>
-            </div>
+                  My Instagram
+                </a>
+              </li>
+            </ul>
           </div>
-        </nav>
-      </div>
+        </div>
+      </nav>
 
+      {/* Routes */}
       <Routes />
-
     </>
-  )
-
+  );
 }
