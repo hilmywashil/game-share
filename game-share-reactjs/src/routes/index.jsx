@@ -28,12 +28,12 @@ function RoutesIndex() {
             <Route path="/" element={<Home />} />
 
             {/* Games */}
-            <Route path="/games" element={<AuthCheck><GameIndex /></AuthCheck>} />
+            <Route path="/games" element={<GameIndex />} />
             <Route path="/games/create" element={<AdminCheck><GameCreate /></AdminCheck>} />
             <Route path="/games/edit/:id" element={<AdminCheck><GameEdit /></AdminCheck>} />
 
             {/* Consoles */}
-            <Route path="/consoles" element={<AuthCheck><ConsoleIndex /></AuthCheck>} />
+            <Route path="/consoles" element={<ConsoleIndex />} />
             <Route path="/consoles/create" element={<AdminCheck><ConsoleCreate /></AdminCheck>} />
             <Route path="/consoles/edit/:id" element={<AdminCheck><ConsoleEdit /></AdminCheck>} />
 
