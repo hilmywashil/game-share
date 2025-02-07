@@ -35,6 +35,11 @@ export default function App() {
                   GAMES
                 </Link>
               </li>
+              <li className="nav-item">
+                <Link to="/consoles" className="nav-link">
+                  CONSOLE
+                </Link>
+              </li>
             </ul>
 
             {/* Instagram Button */}

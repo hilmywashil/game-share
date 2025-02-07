@@ -4,50 +4,49 @@ import axios from "axios";
 
 function Dashboard() {
   const [user, setUser] = useState({});
-  const [isLoading, setIsLoading] = useState(false); // Add loading state
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
   const fetchData = async () => {
-    setIsLoading(true); // Start loading
+    setIsLoading(true);
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    await axios
-      .get("http://localhost:8000/api/user")
-      .then((response) => {
-        setUser(response.data);
-      })
-      .finally(() => {
-        setIsLoading(false); // End loading
-      });
+
+    try {
+      const response = await axios.get("http://localhost:8000/api/user");
+      setUser(response.data);
+    } catch (error) {
+      console.error("Error fetching user:", error);
+      localStorage.removeItem("token");
+      navigate("/login");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
     if (!token) {
       navigate("/login");
     } else {
-      fetchData(); // Fetch user data
+      fetchData();
     }
   }, [token, navigate]);
 
   const logoutHandler = async () => {
     const confirmLogout = window.confirm("Apakah Anda yakin ingin logout?");
     if (confirmLogout) {
-      setIsLoading(true); // Start loading during logout
+      setIsLoading(true);
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-      await axios
-        .post("http://localhost:8000/api/logout")
-        .then(() => {
-          localStorage.removeItem("token");
-          navigate("/login");
-        })
-        .finally(() => {
-          setIsLoading(false); // End loading after logout
-        });
+      try {
+        await axios.post("http://localhost:8000/api/logout");
+      } catch (error) {
+        console.error("Logout failed:", error);
+      } finally {
+        localStorage.removeItem("token");
+        setIsLoading(false);
+        navigate("/login");
+      }
     }
-  };
-
-  const handleBack = () => {
-    navigate("/");
   };
 
   return (
@@ -63,7 +62,6 @@ function Dashboard() {
                 WEBSITE PEMINJAMAN BARANG SEKOLAH
               </h1>
 
-              {/* Show loading spinner while fetching data */}
               {isLoading ? (
                 <div className="spinner-border text-primary" role="status">
                   <span className="visually-hidden">Loading...</span>
@@ -71,35 +69,19 @@ function Dashboard() {
               ) : (
                 <>
                   <p className="text-uppercase" style={{ fontSize: "18px", color: "#333" }}>
-                    Selamat Datang, <strong>{user.name}</strong>
+                    Selamat Datang, <strong>{user.name || "User"}</strong>
                   </p>
                   <hr />
                   <div className="mt-4">
                     <button
                       onClick={logoutHandler}
                       className="btn btn-lg btn-danger me-3"
-                      style={{
-                        borderRadius: "10px",
-                        padding: "10px 20px",
-                        fontWeight: "bold",
-                        transition: "background-color 0.3s",
-                      }}
-                      onMouseOver={(e) => (e.target.style.backgroundColor = "#c82333")}
-                      onMouseOut={(e) => (e.target.style.backgroundColor = "#dc3545")}
                     >
                       Logout
                     </button>
                     <button
-                      onClick={handleBack}
+                      onClick={() => navigate("/")}
                       className="btn btn-lg btn-primary"
-                      style={{
-                        borderRadius: "10px",
-                        padding: "10px 20px",
-                        fontWeight: "bold",
-                        transition: "background-color 0.3s",
-                      }}
-                      onMouseOver={(e) => (e.target.style.backgroundColor = "#0056b3")}
-                      onMouseOut={(e) => (e.target.style.backgroundColor = "#007bff")}
                     >
                       Home
                     </button>

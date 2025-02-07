@@ -10,6 +10,11 @@ import GameIndex from '../views/games/index.jsx';
 import GameCreate from '../views/games/create.jsx';
 import GameEdit from '../views/games/edit.jsx';
 
+//Consoles
+import ConsoleIndex from "../views/consoles/index.jsx";
+import ConsoleCreate from "../views/consoles/create.jsx";
+import ConsoleEdit from "../views/consoles/edit.jsx";
+
 //Authorization
 import Login from '../views/auth/login.jsx';
 import Register from '../views/auth/register.jsx';
@@ -25,7 +30,12 @@ function RoutesIndex() {
             {/* Games */}
             <Route path="/games" element={<AuthCheck><GameIndex /></AuthCheck>} />
             <Route path="/games/create" element={<AdminCheck><GameCreate /></AdminCheck>} />
-            <Route path="/games/edit/:id" element={<GameEdit />} />
+            <Route path="/games/edit/:id" element={<AdminCheck><GameEdit /></AdminCheck>} />
+
+            {/* Consoles */}
+            <Route path="/consoles" element={<AuthCheck><ConsoleIndex /></AuthCheck>} />
+            <Route path="/consoles/create" element={<AdminCheck><ConsoleCreate /></AdminCheck>} />
+            <Route path="/consoles/edit/:id" element={<AdminCheck><ConsoleEdit /></AdminCheck>} />
 
             {/* Authorization */}
             <Route path="/login" element={<Login />} />

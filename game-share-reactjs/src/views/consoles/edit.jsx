@@ -1,4 +1,4 @@
-export default function GameEdit() {
+export default function ConsoleEdit() {
     return (
         <div className="container mt-5 mb-5">
             <div className="row">

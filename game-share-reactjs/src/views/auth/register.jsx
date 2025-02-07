@@ -22,11 +22,12 @@ function Register() {
 
     await axios
       .post("http://localhost:8000/api/register", formData)
-      .then(() => {
-        navigate("/");
+      .then((response) => {
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('user', JSON.stringify(response.data.user));
+        navigate('/dashboard');
       })
       .catch((error) => {
-        console.error(error.response);
         setValidation(error.response.data);
       });
   };

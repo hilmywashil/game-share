@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import api from '../../api';
 
 import { Link } from 'react-router-dom';
+
 import apiConfig from '../../api/apiConfig';
 
 export default function GameIndex() {

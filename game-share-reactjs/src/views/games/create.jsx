@@ -1,4 +1,4 @@
-export default function PostCreate() {
+export default function GameCreate() {
     return (
         <div className="container mt-5 mb-5">
             <div className="row">
