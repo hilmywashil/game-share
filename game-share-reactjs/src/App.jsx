@@ -38,19 +38,6 @@ export default function App() {
             </ul>
 
             {/* Instagram Button */}
-            <ul className="navbar-nav ms-auto">
-              <li className="nav-item">
-                <a
-                  href="https://instagram.com/hilmygoodboy_"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-success fw-semibold px-3"
-                  style={{ transition: "0.3s" }}
-                >
-                  My Instagram
-                </a>
-              </li>
-            </ul>
           </div>
         </div>
       </nav>

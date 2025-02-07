@@ -24,6 +24,7 @@ const styles = {
         alignItems: 'center',
         height: '100vh',
         background: 'linear-gradient(135deg, #4f46e5, #d946ef)',
+        padding: '20px', // Supaya tidak terlalu mepet di HP
     },
     card: {
         padding: '40px',
@@ -32,22 +33,25 @@ const styles = {
         borderRadius: '15px',
         boxShadow: '0px 10px 30px rgba(0, 0, 0, 0.1)',
         maxWidth: '500px',
+        width: '90%', // Agar responsif di HP
+        marginTop: '-200px',
+
     },
     title: {
-        fontSize: '28px',
+        fontSize: '2rem', // Ukuran font fleksibel
         fontWeight: 'bold',
         color: '#333',
         marginBottom: '10px',
     },
     subtitle: {
-        fontSize: '18px',
+        fontSize: '1.2rem',
         color: '#666',
         marginBottom: '20px',
     },
     button: {
         display: 'inline-block',
-        padding: '10px 20px',
-        fontSize: '16px',
+        padding: '12px 24px',
+        fontSize: '1rem',
         fontWeight: 'bold',
         color: 'white',
         backgroundColor: '#e1306c',
@@ -57,6 +61,17 @@ const styles = {
     },
 };
 
+// Media query untuk layar kecil (mobile)
+if (window.innerWidth < 768) {
+    styles.card.padding = '30px';
+    styles.title.fontSize = '1.5rem';
+    styles.subtitle.fontSize = '1rem';
+    styles.button.padding = '10px 20px';
+}
+
+// Hover effect untuk desktop
 styles.button[':hover'] = {
     backgroundColor: '#c22f5b',
 };
+
+export { styles };

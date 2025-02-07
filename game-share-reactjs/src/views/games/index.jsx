@@ -24,6 +24,13 @@ export default function GameIndex() {
 
     }, []);
 
+    const deleteGame = async (id) =>{
+        await api.delete(`/api/games/${id}`)
+        .then(() => {
+            fetchDataGames();
+        })
+    }
+
     return (
         <div className="container mt-5 mb-5">
             <div className="row">
@@ -62,13 +69,13 @@ export default function GameIndex() {
                                                     <td>{g.console.name}</td>
                                                     <td className="text-center">
                                                         <Link to={`/games/edit/${g.id}`} className="btn btn-sm btn-primary rounded-sm shadow border-0 me-2">EDIT</Link>
-                                                        <button className="btn btn-sm btn-danger rounded-sm shadow border-0">DELETE</button>
+                                                        <button onClick={() => deleteGame(g.id)} className="btn btn-sm btn-danger rounded-sm shadow border-0">DELETE</button>
                                                     </td>
                                                 </tr>
                                             ))
 
                                             : <tr>
-                                                <td colSpan="4" className="text-center">
+                                                <td colSpan="9" className="text-center">
                                                     <div className="alert alert-danger mb-0">
                                                         Data Belum Tersedia!
                                                     </div>
