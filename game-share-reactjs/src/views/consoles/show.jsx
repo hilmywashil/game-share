@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import apiConfig from '../../api/apiConfig';
 import api from '../../api';
-import './styles/consoleShow.css';
 
 export default function ConsoleShow() {
     const { id } = useParams();

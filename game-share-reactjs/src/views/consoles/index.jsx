@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import api from '../../api';
-import './styles/ConsoleIndex.css';
 import axios from 'axios';
 
 export default function ConsoleIndex() {
