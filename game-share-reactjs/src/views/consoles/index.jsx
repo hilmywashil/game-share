@@ -110,9 +110,9 @@ export default function ConsoleIndex() {
             </div>
             <div style={styles.grid}>
                 {consoles.length > 0 ? consoles.map((c, index) => (
-                    <div 
-                        key={index} 
-                        style={styles.card} 
+                    <div
+                        key={index}
+                        style={styles.card}
                         onClick={() => navigate(`/consoles/show/${c.id}`)}
                         onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
                         onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
@@ -120,15 +120,15 @@ export default function ConsoleIndex() {
                         <h3>{c.name}</h3>
                         {user.role === "admin" && (
                             <div style={styles.actions}>
-                                <Link 
-                                    to={`/consoles/edit/${c.id}`} 
-                                    style={{ ...styles.btn, ...styles.btnPrimary }} 
+                                <Link
+                                    to={`/consoles/edit/${c.id}`}
+                                    style={{ ...styles.btn, ...styles.btnPrimary }}
                                     onClick={(e) => e.stopPropagation()}
                                 >
                                     EDIT
                                 </Link>
-                                <button 
-                                    onClick={(e) => { e.stopPropagation(); deleteConsole(c.id); }} 
+                                <button
+                                    onClick={(e) => { e.stopPropagation(); deleteConsole(c.id); }}
                                     style={{ ...styles.btn, ...styles.btnDanger }}
                                 >
                                     DELETE
@@ -137,8 +137,39 @@ export default function ConsoleIndex() {
                         )}
                     </div>
                 )) : (
-                    <div style={styles.noData}>
-                        <p>Data Belum Tersedia!</p>
+                    <div style={styles.grid}>
+                        <div
+                            style={styles.card}
+                            onClick={() => navigate(`/consoles/show`)}
+                            onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+                            onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                        >
+                            <h3>PS2</h3>
+                        </div>
+                        <div
+                            style={styles.card}
+                            onClick={() => navigate(`/consoles/show`)}
+                            onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+                            onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                        >
+                            <h3>PSP</h3>
+                        </div>
+                        <div
+                            style={styles.card}
+                            onClick={() => navigate(`/consoles/show`)}
+                            onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+                            onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                        >
+                            <h3>PS3</h3>
+                        </div>
+                        <div
+                            style={styles.card}
+                            onClick={() => navigate(`/consoles/show`)}
+                            onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+                            onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                        >
+                            <h3>Nintendo</h3>
+                        </div>
                     </div>
                 )}
             </div>
