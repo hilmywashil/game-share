@@ -87,6 +87,18 @@ export default function ConsoleShow() {
             color: '#888',
             marginTop: '15px',
         },
+        detailButton: {
+            display: 'inline-block',
+            marginTop: '15px',
+            padding: '10px 15px',
+            backgroundColor: '#1f1f1f',
+            color: 'white',
+            textDecoration: 'none',
+            borderRadius: '10px',
+            border: '1px solid #cc6ce7',
+
+        },
+        
     };
 
     return (
@@ -99,7 +111,7 @@ export default function ConsoleShow() {
                         <div key={game.id} style={styles.gameCard}>
                             <h4 style={styles.gameTitle}>{game.name}</h4>
                             <p style={styles.gameDescription}><strong>Size:</strong> {formatSize(game.size)}</p>
-                            <Link to={`/games/show/${game.id}`} rel="noopener noreferrer" className="btn btn-lg btn-primary">Detail</Link>
+                            <Link to={`/games/show/${game.id}`} rel="noopener noreferrer" style={styles.detailButton}>Detail</Link>
                         </div>
                     ))}
                 </div>

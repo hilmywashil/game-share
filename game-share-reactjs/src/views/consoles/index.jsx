@@ -137,47 +137,47 @@ export default function ConsoleIndex() {
                         )}
                     </div>
                 )) : (
-                    //DUMMY CONSOLES
-                    <div style={styles.grid}>
-                        <div
-                            style={styles.card}
-                            onClick={() => navigate(`/consoles/show`)}
-                            onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-                            onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
-                        >
-                            <h3>PS2</h3>
-                        </div>
-                        <div
-                            style={styles.card}
-                            onClick={() => navigate(`/consoles/show`)}
-                            onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-                            onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
-                        >
-                            <h3>PSP</h3>
-                        </div>
-                        <div
-                            style={styles.card}
-                            onClick={() => navigate(`/consoles/show`)}
-                            onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-                            onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
-                        >
-                            <h3>PS3</h3>
-                        </div>
-                        <div
-                            style={styles.card}
-                            onClick={() => navigate(`/consoles/show`)}
-                            onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-                            onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
-                        >
-                            <h3>Nintendo</h3>
-                        </div>
-                    </div>
-                    //DUMMY CONSOLES END
+                    // //DUMMY CONSOLES
+                    // <div style={styles.grid}>
+                    //     <div
+                    //         style={styles.card}
+                    //         onClick={() => navigate(`/consoles/show`)}
+                    //         onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+                    //         onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                    //     >
+                    //         <h3>PS2</h3>
+                    //     </div>
+                    //     <div
+                    //         style={styles.card}
+                    //         onClick={() => navigate(`/consoles/show`)}
+                    //         onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+                    //         onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                    //     >
+                    //         <h3>PSP</h3>
+                    //     </div>
+                    //     <div
+                    //         style={styles.card}
+                    //         onClick={() => navigate(`/consoles/show`)}
+                    //         onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+                    //         onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                    //     >
+                    //         <h3>PS3</h3>
+                    //     </div>
+                    //     <div
+                    //         style={styles.card}
+                    //         onClick={() => navigate(`/consoles/show`)}
+                    //         onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+                    //         onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                    //     >
+                    //         <h3>Nintendo</h3>
+                    //     </div>
+                    // </div>
+                    // //DUMMY CONSOLES END
 
                     //NO DATA 
-                    //     <div style={styles.noData}>
-                    //     <p>Data Belum Tersedia!</p>
-                    //     </div>
+                    <div style={styles.noData}>
+                        <p>Data Belum Tersedia!</p>
+                    </div>
                 )}
             </div>
         </div>

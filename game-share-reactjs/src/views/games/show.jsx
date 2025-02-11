@@ -63,6 +63,17 @@ export default function ShowGame() {
             border: '1px solid red',
 
         },
+        downloadButton: {
+            display: 'inline-block',
+            marginTop: '15px',
+            padding: '10px 15px',
+            backgroundColor: '#1f1f1f',
+            color: 'white',
+            textDecoration: 'none',
+            borderRadius: '10px',
+            border: '1px solid #cc6ce7',
+
+        },
     };
 
     return (
@@ -80,7 +91,9 @@ export default function ShowGame() {
                     <p><strong>Console:</strong> {game.console.name}</p>
                     <p><strong>Genre:</strong> {game.genre.name}</p>
                     <p><strong>Description:</strong> {game.description}</p>
-                    <Link to="/games" style={styles.backButton}>Back to Games</Link>
+                    <p><strong>Downloads:</strong> {game.downloads}</p>
+                    <a style={styles.downloadButton} href={`https://${game.link_download}`}>Download</a>
+                    {/* <Link to="/games" style={styles.backButton}>Back to Games</Link> */}
                 </div>
             </div>
         </div>

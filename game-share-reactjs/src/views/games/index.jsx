@@ -169,83 +169,83 @@ export default function GameIndex() {
                         </div>
                     ))
                 ) : (
-                    //DUMMY GAMES START
-                    <div style={styles.grid}>
-                        <div style={styles.cardWrapper}>
-                            <div
-                                style={styles.card}
-                                onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-                                onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
-                                onClick={() => window.location.href = `/games/show`}
-                            >
-                                <img src="https://www.gamereactor.dk/media/66/tekken6_186604b.jpg" style={styles.image} />
-                                <div style={styles.info}>
-                                    <h5><strong>Tekken 6</strong></h5>
-                                    <hr />
-                                    <p><strong>Size:</strong> {formatSize(1500)}</p>
-                                    <p><strong>Console:</strong> PSP</p>
-                                    <p><strong>Genre:</strong> Fighting</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div style={styles.cardWrapper}>
-                            <div
-                                style={styles.card}
-                                onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-                                onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
-                                onClick={() => window.location.href = `/games/show`}
-                            >
-                                <img src="https://th.bing.com/th/id/OIP.v-bq38uY8wFqjcgeJP0XnQHaKX?rs=1&pid=ImgDetMain" style={styles.image} />
-                                <div style={styles.info}>
-                                    <h5><strong>NFS Most Wanted</strong></h5>
-                                    <hr />
-                                    <p><strong>Size:</strong> {formatSize(4000)}</p>
-                                    <p><strong>Console:</strong> PS2</p>
-                                    <p><strong>Genre:</strong> Racing</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div style={styles.cardWrapper}>
-                            <div
-                                style={styles.card}
-                                onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-                                onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
-                                onClick={() => window.location.href = `/games/show`}
-                            >
-                                <img src="https://m.media-amazon.com/images/M/MV5BZjIxYjdkNDMtYjBmNi00ZDgyLThhYTQtNmU2ZmE2MTg1NTVkXkEyXkFqcGdeQXVyMTA0MTM5NjI2._V1_.jpg" style={styles.image} />
-                                <div style={styles.info}>
-                                    <h5><strong>Tekken 5</strong></h5>
-                                    <hr />
-                                    <p><strong>Size:</strong> {formatSize(3000)}</p>
-                                    <p><strong>Console:</strong> PS2</p>
-                                    <p><strong>Genre:</strong> Fighting</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div style={styles.cardWrapper}>
-                            <div
-                                style={styles.card}
-                                onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-                                onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
-                                onClick={() => navigate(`/games/show`)}
-                                >
-                                <img src="https://th.bing.com/th/id/R.c87b6cbabd9e29151f1120b702249d34?rik=W0gpu9zryjvBjg&riu=http%3a%2f%2fwww.mobygames.com%2fimages%2fcovers%2fl%2f6878-rumble-racing-playstation-2-front-cover.jpg&ehk=KtgVa0Cz1B021wk8jGRWKMMyvExihZupQ2t9X6XSSZU%3d&risl=&pid=ImgRaw&r=0" style={styles.image} />
-                                <div style={styles.info}>
-                                    <h5><strong>Rumble Racing 2</strong></h5>
-                                    <hr />
-                                    <p><strong>Size:</strong> {formatSize(2000)}</p>
-                                    <p><strong>Console:</strong> PS2</p>
-                                    <p><strong>Genre:</strong> Racing</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    //DUMMY GAMES END (COMMENT TO DEACTIVATE)
-
-                    //NO DATA 
-                    //     <div style={styles.noData}>
-                    //     <p>Data Belum Tersedia!</p>
+                    // //DUMMY GAMES START
+                    // <div style={styles.grid}>
+                    //     <div style={styles.cardWrapper}>
+                    //         <div
+                    //             style={styles.card}
+                    //             onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+                    //             onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                    //             onClick={() => window.location.href = `/games/show`}
+                    //         >
+                    //             <img src="https://www.gamereactor.dk/media/66/tekken6_186604b.jpg" style={styles.image} />
+                    //             <div style={styles.info}>
+                    //                 <h5><strong>Tekken 6</strong></h5>
+                    //                 <hr />
+                    //                 <p><strong>Size:</strong> {formatSize(1500)}</p>
+                    //                 <p><strong>Console:</strong> PSP</p>
+                    //                 <p><strong>Genre:</strong> Fighting</p>
+                    //             </div>
+                    //         </div>
                     //     </div>
+                    //     <div style={styles.cardWrapper}>
+                    //         <div
+                    //             style={styles.card}
+                    //             onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+                    //             onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                    //             onClick={() => window.location.href = `/games/show`}
+                    //         >
+                    //             <img src="https://th.bing.com/th/id/OIP.v-bq38uY8wFqjcgeJP0XnQHaKX?rs=1&pid=ImgDetMain" style={styles.image} />
+                    //             <div style={styles.info}>
+                    //                 <h5><strong>NFS Most Wanted</strong></h5>
+                    //                 <hr />
+                    //                 <p><strong>Size:</strong> {formatSize(4000)}</p>
+                    //                 <p><strong>Console:</strong> PS2</p>
+                    //                 <p><strong>Genre:</strong> Racing</p>
+                    //             </div>
+                    //         </div>
+                    //     </div>
+                    //     <div style={styles.cardWrapper}>
+                    //         <div
+                    //             style={styles.card}
+                    //             onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+                    //             onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                    //             onClick={() => window.location.href = `/games/show`}
+                    //         >
+                    //             <img src="https://m.media-amazon.com/images/M/MV5BZjIxYjdkNDMtYjBmNi00ZDgyLThhYTQtNmU2ZmE2MTg1NTVkXkEyXkFqcGdeQXVyMTA0MTM5NjI2._V1_.jpg" style={styles.image} />
+                    //             <div style={styles.info}>
+                    //                 <h5><strong>Tekken 5</strong></h5>
+                    //                 <hr />
+                    //                 <p><strong>Size:</strong> {formatSize(3000)}</p>
+                    //                 <p><strong>Console:</strong> PS2</p>
+                    //                 <p><strong>Genre:</strong> Fighting</p>
+                    //             </div>
+                    //         </div>
+                    //     </div>
+                    //     <div style={styles.cardWrapper}>
+                    //         <div
+                    //             style={styles.card}
+                    //             onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+                    //             onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                    //             onClick={() => navigate(`/games/show`)}
+                    //             >
+                    //             <img src="https://th.bing.com/th/id/R.c87b6cbabd9e29151f1120b702249d34?rik=W0gpu9zryjvBjg&riu=http%3a%2f%2fwww.mobygames.com%2fimages%2fcovers%2fl%2f6878-rumble-racing-playstation-2-front-cover.jpg&ehk=KtgVa0Cz1B021wk8jGRWKMMyvExihZupQ2t9X6XSSZU%3d&risl=&pid=ImgRaw&r=0" style={styles.image} />
+                    //             <div style={styles.info}>
+                    //                 <h5><strong>Rumble Racing 2</strong></h5>
+                    //                 <hr />
+                    //                 <p><strong>Size:</strong> {formatSize(2000)}</p>
+                    //                 <p><strong>Console:</strong> PS2</p>
+                    //                 <p><strong>Genre:</strong> Racing</p>
+                    //             </div>
+                    //         </div>
+                    //     </div>
+                    // </div>
+                    // //DUMMY GAMES END (COMMENT TO DEACTIVATE)
+
+                    // NO DATA 
+                    <div style={styles.noData}>
+                        <p>Data Belum Tersedia!</p>
+                    </div>
 
                 )}
             </div>
