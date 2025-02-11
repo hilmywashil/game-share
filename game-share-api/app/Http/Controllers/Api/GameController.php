@@ -4,47 +4,59 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Game;
 use App\Http\Controllers\Controller;
+use Dotenv\Exception\ValidationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-
+use Exception;
 class GameController extends Controller
 {
     public function index()
     {
-        $games = Game::with(['publisher', 'genre', 'console'])->paginate();
-        return response()->json([
-            'success' => true,
-            'data' => $games
-        ]);
+        try {
+            $games = Game::with(['publisher', 'genre', 'console'])->paginate(10);
+            return response()->json([
+                'success' => true,
+                'data' => $games
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Failed'
+            ]);
+        }
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'size' => 'nullable|string',
-            'release_date' => 'nullable|date',
-            'publisher_id' => 'required|exists:publishers,id',
-            'genre_id' => 'required|exists:genres,id',
-            'console_id' => 'required|exists:consoles,id',
-            'link_download' => 'nullable|string',
-            'downloads' => 'nullable|integer',
-        ]);
+        try {
+            $request->validate([
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'name' => 'required|string|max:255',
+                'description' => 'nullable|string',
+                'size' => 'nullable|string',
+                'publisher_id' => 'required|exists:publishers,id',
+                'genre_id' => 'required|exists:genres,id',
+                'console_id' => 'required|exists:consoles,id',
+                'link_download' => 'nullable|string',
+                'downloads' => 'nullable|integer',
+            ]);
 
-        if ($request->hasFile('image')) {
-            // Menggunakan storeAs dengan hashName
+            if (!$request->hasFile('image')) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'File gambar tidak ditemukan'
+                ], 400);
+            }
+
             $imagePath = $request->file('image')->store('games', 'public');
-            // $this->request->file('Image')->store('/Absensi/Overtime In/'.$now->toDateString(), 'public'),
+            // dd($request->all());
 
             $game = Game::create([
-                'image' => $imagePath,  // Menyimpan path gambar
+                'image' => $imagePath,
                 'name' => $request->name,
                 'description' => $request->description,
                 'size' => $request->size,
-                'release_date' => $request->release_date,
                 'publisher_id' => $request->publisher_id,
                 'genre_id' => $request->genre_id,
                 'console_id' => $request->console_id,
@@ -57,11 +69,18 @@ class GameController extends Controller
                 'message' => 'Game berhasil ditambahkan',
                 'data' => $game
             ], 201);
-        } else {
+        } catch (ValidationException $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'File gambar tidak ditemukan'
-            ], 400);
+                'message' => 'Validasi gagal',
+                'errors' => $e->errors()
+            ], 422);
+        } catch (Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Terjadi kesalahan',
+                'error' => $e->getMessage()
+            ], 500);
         }
     }
     public function show($id)
@@ -92,40 +111,54 @@ class GameController extends Controller
             ], 404);
         }
 
-        $validator = Validator::make($request->all(), [
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'size' => 'nullable|string',
-            'release_date' => 'nullable|date',
-            'publisher_id' => 'required|exists:publishers,id',
-            'genre_id' => 'required|exists:genres,id',
-            'console_id' => 'required|exists:consoles,id',
-            'link_download' => 'nullable|string',
-            'downloads' => 'nullable|integer',
-        ]);
+        try {
 
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            $validator = Validator::make($request->all(), [
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'name' => 'required|string|max:255',
+                'description' => 'nullable|string',
+                'size' => 'nullable|string',
+                'publisher_id' => 'required|exists:publishers,id',
+                'genre_id' => 'required|exists:genres,id',
+                'console_id' => 'required|exists:consoles,id',
+                'link_download' => 'nullable|string',
+                'downloads' => 'nullable|integer',
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json($validator->errors(), 422);
+            }
+
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $imagePath = $image->storeAs('public/games', $image->hashName());  // Menyimpan dengan nama hash
+
+                Storage::delete('public/games/' . basename($game->image));
+
+                $game->update(['image' => $imagePath]);  // Update nama gambar
+            }
+
+            $game->update($request->except('image'));
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Game berhasil diperbarui',
+                'data' => $game
+            ]);
+        } catch (ValidationException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation Failed',
+                'error' => $e->getMessage(),
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error',
+                'error' => $e->getMessage(),
+            ]);
         }
 
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imagePath = $image->storeAs('public/games', $image->hashName());  // Menyimpan dengan nama hash
-
-            // Menghapus gambar lama jika ada
-            Storage::delete('public/games/' . basename($game->image));
-
-            $game->update(['image' => $imagePath]);  // Update nama gambar
-        }
-
-        $game->update($request->except('image'));
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Game berhasil diperbarui',
-            'data' => $game
-        ]);
     }
     public function destroy($id)
     {

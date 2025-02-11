@@ -31,6 +31,11 @@ export default function App() {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav me-auto">
               <li className="nav-item">
+                <Link to="/dashboard" className="nav-link">
+                  DASHBOARD
+                </Link>
+              </li>
+              <li className="nav-item">
                 <Link to="/games" className="nav-link">
                   GAMES
                 </Link>

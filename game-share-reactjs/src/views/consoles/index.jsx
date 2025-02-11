@@ -1,76 +1,68 @@
 import { useState, useEffect } from 'react';
-
+import { Link, useNavigate } from 'react-router-dom';
 import api from '../../api';
-
-import { Link } from 'react-router-dom';
+import './styles/ConsoleIndex.css';
+import axios from 'axios';
 
 export default function ConsoleIndex() {
-
     const [consoles, setConsoles] = useState([]);
+    const token = localStorage.getItem("token");
+    const [user, setUser] = useState({});
+
+    useEffect(() => {
+        if (token) {
+            axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+            axios.get("http://localhost:8000/api/user").then((response) => {
+                setUser(response.data);
+            });
+        }
+    }, [token]);
+
+    const navigate = useNavigate();
 
     const fetchDataConsoles = async () => {
-
         await api.get('/api/consoles')
             .then(response => {
                 setConsoles(response.data.data.data);
             })
-
     }
 
     useEffect(() => {
-
         fetchDataConsoles();
-
     }, []);
 
-    const deleteConsole = async (id) =>{
+    const deleteConsole = async (id) => {
         await api.delete(`/api/consoles/${id}`)
-        .then(() => {
-            fetchDataConsoles();
-        })
+            .then(() => {
+                fetchDataConsoles();
+            })
     }
 
     return (
         <div className="container mt-5 mb-5">
-            <div className="row">
-                <div className="col-md-12">
-                    <Link to="/consoles/create" className="btn btn-md btn-success rounded shadow border-0 mb-3">ADD NEW CONSOLE</Link>
-                    <div className="card border-0 rounded shadow">
-                        <div className="card-body">
-                            <table className="table table-bordered">
-                                <thead className="bg-dark text-white">
-                                    <tr>
-                                        <th scope="col">Name</th>
-                                        <th scope="col" style={{ 'width': '15%' }}>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {
-                                        consoles.length > 0
-                                            ? consoles.map((c, index) => (
-                                                <tr key={index}>
-                                                    <td>{c.name}</td>
-                                                    <td className="text-center">
-                                                        <Link to={`/consoles/edit/${c.id}`} className="btn btn-sm btn-primary rounded-sm shadow border-0 me-2">EDIT</Link>
-                                                        <button onClick={() => deleteConsole(c.id)} className="btn btn-sm btn-danger rounded-sm shadow border-0">DELETE</button>
-                                                    </td>
-                                                </tr>
-                                            ))
-
-                                            : <tr>
-                                                <td colSpan="9" className="text-center">
-                                                    <div className="alert alert-danger mb-0">
-                                                        Data Belum Tersedia!
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
+            <div className="header">
+                <h2>Console List</h2>
+                {user.role == "admin" && (
+                    <Link to="/consoles/create" className="btn btn-success">ADD NEW CONSOLE</Link>
+                )}
+            </div>
+            <div className="console-grid">
+                {consoles.length > 0 ? consoles.map((c, index) => (
+                    <div key={index} className="console-card" onClick={() => navigate(`/consoles/show/${c.id}`)}>
+                        <h3>{c.name}</h3>
+                        {user.role == "admin" && (
+                            <div className="actions">
+                                <Link to={`/consoles/edit/${c.id}`} className="btn btn-primary" onClick={(e) => e.stopPropagation()}>EDIT</Link>
+                                <button onClick={(e) => { e.stopPropagation(); deleteConsole(c.id); }} className="btn btn-danger">DELETE</button>
+                            </div>
+                        )}
                     </div>
-                </div>
+                )) : (
+                    <div className="no-data">
+                        <p>Data Belum Tersedia!</p>
+                    </div>
+                )}
             </div>
         </div>
-    )
+    );
 }

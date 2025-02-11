@@ -5,8 +5,8 @@ import axios from "axios";
 function Dashboard() {
   const [user, setUser] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
   const token = localStorage.getItem("token");
+  const navigate = useNavigate();
 
   const fetchData = async () => {
     setIsLoading(true);

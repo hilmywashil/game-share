@@ -1,0 +1,57 @@
+.container {
+    max-width: 800px;
+    margin: auto;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.console-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.console-card {
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.actions {
+    margin-top: 10px;
+}
+
+.btn {
+    padding: 5px 10px;
+    margin: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-success {
+    background: #28a745;
+    color: white;
+}
+
+.btn-primary {
+    background: #007bff;
+    color: white;
+}
+
+.btn-danger {
+    background: #dc3545;
+    color: white;
+}
+
+.no-data {
+    text-align: center;
+    font-size: 18px;
+    color: red;
+}
