@@ -136,7 +136,7 @@ export default function GameIndex() {
     return (
         <div style={styles.container}>
             <div style={styles.header}>
-                <h2>ALL GAME</h2>
+                <h2>All Game List</h2>
                 {user.role === "admin" && (
                     <Link to="/games/create" style={{ ...styles.btn, ...styles.btnSuccess }}>ADD NEW GAME</Link>
                 )}
@@ -169,6 +169,7 @@ export default function GameIndex() {
                         </div>
                     ))
                 ) : (
+                    //DUMMY
                     <div style={styles.grid}>
                         <div style={styles.cardWrapper}>
                             <div
@@ -179,11 +180,45 @@ export default function GameIndex() {
                             >
                                 <img src="https://www.gamereactor.dk/media/66/tekken6_186604b.jpg" style={styles.image} />
                                 <div style={styles.info}>
-                                    <h5><strong>Nama</strong></h5>
+                                    <h5><strong>Tekken 6</strong></h5>
                                     <hr />
                                     <p><strong>Size:</strong> {formatSize(1500)}</p>
-                                    <p><strong>Console:</strong> Nama Console</p>
-                                    <p><strong>Genre:</strong> Genre</p>
+                                    <p><strong>Console:</strong> PSP</p>
+                                    <p><strong>Genre:</strong> Fighting</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div style={styles.cardWrapper}>
+                            <div
+                                style={styles.card}
+                                onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+                                onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                                onClick={() => window.location.href = `/games/show`}
+                            >
+                                <img src="https://th.bing.com/th/id/OIP.v-bq38uY8wFqjcgeJP0XnQHaKX?rs=1&pid=ImgDetMain" style={styles.image} />
+                                <div style={styles.info}>
+                                    <h5><strong>NFS Most Wanted</strong></h5>
+                                    <hr />
+                                    <p><strong>Size:</strong> {formatSize(4000)}</p>
+                                    <p><strong>Console:</strong> PS2</p>
+                                    <p><strong>Genre:</strong> Racing</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div style={styles.cardWrapper}>
+                            <div
+                                style={styles.card}
+                                onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+                                onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                                onClick={() => window.location.href = `/games/show`}
+                            >
+                                <img src="https://m.media-amazon.com/images/M/MV5BZjIxYjdkNDMtYjBmNi00ZDgyLThhYTQtNmU2ZmE2MTg1NTVkXkEyXkFqcGdeQXVyMTA0MTM5NjI2._V1_.jpg" style={styles.image} />
+                                <div style={styles.info}>
+                                    <h5><strong>Tekken 5</strong></h5>
+                                    <hr />
+                                    <p><strong>Size:</strong> {formatSize(3000)}</p>
+                                    <p><strong>Console:</strong> PS2</p>
+                                    <p><strong>Genre:</strong> Fighting</p>
                                 </div>
                             </div>
                         </div>
