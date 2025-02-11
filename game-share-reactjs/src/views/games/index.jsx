@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import api from '../../api';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import apiConfig from '../../api/apiConfig';
 import axios from 'axios';
 
@@ -8,6 +8,7 @@ export default function GameIndex() {
     const [games, setGames] = useState([]);
     const token = localStorage.getItem("token");
     const [user, setUser] = useState({});
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (token) {
@@ -43,7 +44,6 @@ export default function GameIndex() {
         return (size / 1000).toFixed(1) + 'GB';
     };
 
-    // Styling dalam objek JavaScript (Seperti ConsoleIndex.js)
     const styles = {
         container: {
             maxWidth: '800px',
@@ -227,8 +227,8 @@ export default function GameIndex() {
                                 style={styles.card}
                                 onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
                                 onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
-                                onClick={() => window.location.href = `/games/show`}
-                            >
+                                onClick={() => navigate(`/games/show`)}
+                                >
                                 <img src="https://th.bing.com/th/id/R.c87b6cbabd9e29151f1120b702249d34?rik=W0gpu9zryjvBjg&riu=http%3a%2f%2fwww.mobygames.com%2fimages%2fcovers%2fl%2f6878-rumble-racing-playstation-2-front-cover.jpg&ehk=KtgVa0Cz1B021wk8jGRWKMMyvExihZupQ2t9X6XSSZU%3d&risl=&pid=ImgRaw&r=0" style={styles.image} />
                                 <div style={styles.info}>
                                     <h5><strong>Rumble Racing 2</strong></h5>
