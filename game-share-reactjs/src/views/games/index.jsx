@@ -75,7 +75,7 @@ export default function GameIndex() {
                         </div>
                     ))
                 ) : (
-                    <div className="alert alert-danger text-center">Data Belum Tersedia!</div>
+                    <div className="no-data">Data Belum Tersedia!</div>
                 )}
             </div>
         </div>
