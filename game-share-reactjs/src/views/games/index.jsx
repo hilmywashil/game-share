@@ -169,8 +169,24 @@ export default function GameIndex() {
                         </div>
                     ))
                 ) : (
-                    <div style={styles.noData}>
-                        <p>Data Belum Tersedia!</p>
+                    <div style={styles.grid}>
+                        <div style={styles.cardWrapper}>
+                            <div
+                                style={styles.card}
+                                onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+                                onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                                onClick={() => window.location.href = `/games/show`}
+                            >
+                                <img src="https://www.gamereactor.dk/media/66/tekken6_186604b.jpg" style={styles.image} />
+                                <div style={styles.info}>
+                                    <h5><strong>Nama</strong></h5>
+                                    <hr />
+                                    <p><strong>Size:</strong> {formatSize(1500)}</p>
+                                    <p><strong>Console:</strong> Nama Console</p>
+                                    <p><strong>Genre:</strong> Genre</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 )}
             </div>
