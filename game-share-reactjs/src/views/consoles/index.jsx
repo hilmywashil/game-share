@@ -137,6 +137,7 @@ export default function ConsoleIndex() {
                         )}
                     </div>
                 )) : (
+                    //DUMMY CONSOLES
                     <div style={styles.grid}>
                         <div
                             style={styles.card}
@@ -171,6 +172,12 @@ export default function ConsoleIndex() {
                             <h3>Nintendo</h3>
                         </div>
                     </div>
+                    //DUMMY CONSOLES END
+
+                    //NO DATA 
+                    //     <div style={styles.noData}>
+                    //     <p>Data Belum Tersedia!</p>
+                    //     </div>
                 )}
             </div>
         </div>

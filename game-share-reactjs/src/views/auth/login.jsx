@@ -41,7 +41,7 @@ function Login() {
                 <div className="col-md-5">
                     <div className="card border-0 rounded shadow-lg" style={{ backgroundColor: "#1f1f1f", padding: "30px" }}>
                         <div className="card-body">
-                            <h3 className="fw-bold text-center" style={{ color: "white" }}>LOGIN</h3>
+                            <h3 className="fw-bold text-center" style={{ color: "white" }}>Login ( Coming Soon )</h3>
                             <hr />
                             {validation.message && (
                                 <div className="alert alert-danger text-center">
