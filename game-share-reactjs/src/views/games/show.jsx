@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import api from '../../api';
 import apiConfig from '../../api/apiConfig';
-import './styles/GameIndex.css';
 
 export default function ShowGame() {
     const { id } = useParams();
