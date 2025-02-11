@@ -55,20 +55,19 @@ function Dashboard() {
         <div className="col-md-8">
           <div
             className="card border-0 rounded shadow-lg"
-            style={{ padding: "40px", backgroundColor: "#f9f9f9" }}
+            style={{ padding: "40px", backgroundColor: "#1f1f1f" }}
           >
             <div className="card-body">
-              <h1 className="fw-bold" style={{ color: "#007bff" }}>
-                WEBSITE PEMINJAMAN BARANG SEKOLAH
+              <h1 className="fw-bold" style={{ color: "white" }}>
+                DASHBOARD
               </h1>
-
               {isLoading ? (
                 <div className="spinner-border text-primary" role="status">
                   <span className="visually-hidden">Loading...</span>
                 </div>
               ) : (
                 <>
-                  <p className="text-uppercase" style={{ fontSize: "18px", color: "#333" }}>
+                  <p className="text-uppercase" style={{ fontSize: "18px", color: "white" }}>
                     Selamat Datang, <strong>{user.name || "User"}</strong>
                   </p>
                   <hr />

@@ -37,27 +37,107 @@ export default function ConsoleIndex() {
             })
     }
 
+    // Styling dalam JS
+    const styles = {
+        container: {
+            maxWidth: '800px',
+            margin: '50px auto',
+            padding: '20px',
+        },
+        header: {
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginBottom: '20px',
+        },
+        grid: {
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+            gap: '20px',
+        },
+        card: {
+            padding: '20px',
+            borderRadius: '10px',
+            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+            backgroundColor: '#1f1f1f',
+            textAlign: 'center',
+            cursor: 'pointer',
+            transition: 'transform 0.2s',
+        },
+        cardHover: {
+            transform: 'scale(1.05)',
+        },
+        actions: {
+            marginTop: '15px',
+            display: 'flex',
+            justifyContent: 'center',
+            gap: '10px',
+        },
+        btn: {
+            padding: '8px 12px',
+            borderRadius: '5px',
+            cursor: 'pointer',
+            textDecoration: 'none',
+            border: 'none',
+        },
+        btnPrimary: {
+            backgroundColor: '#007bff',
+            color: 'white',
+        },
+        btnDanger: {
+            backgroundColor: '#dc3545',
+            color: 'white',
+        },
+        btnSuccess: {
+            backgroundColor: '#28a745',
+            color: 'white',
+            padding: '10px 15px',
+        },
+        noData: {
+            textAlign: 'center',
+            fontStyle: 'italic',
+            color: '#888',
+        }
+    };
+
     return (
-        <div className="container mt-5 mb-5">
-            <div className="header">
+        <div style={styles.container}>
+            <div style={styles.header}>
                 <h2>Console List</h2>
-                {user.role == "admin" && (
-                    <Link to="/consoles/create" className="btn btn-success">ADD NEW CONSOLE</Link>
+                {user.role === "admin" && (
+                    <Link to="/consoles/create" style={{ ...styles.btn, ...styles.btnSuccess }}>ADD NEW CONSOLE</Link>
                 )}
             </div>
-            <div className="console-grid">
+            <div style={styles.grid}>
                 {consoles.length > 0 ? consoles.map((c, index) => (
-                    <div key={index} className="console-card" onClick={() => navigate(`/consoles/show/${c.id}`)}>
+                    <div 
+                        key={index} 
+                        style={styles.card} 
+                        onClick={() => navigate(`/consoles/show/${c.id}`)}
+                        onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+                        onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                    >
                         <h3>{c.name}</h3>
-                        {user.role == "admin" && (
-                            <div className="actions">
-                                <Link to={`/consoles/edit/${c.id}`} className="btn btn-primary" onClick={(e) => e.stopPropagation()}>EDIT</Link>
-                                <button onClick={(e) => { e.stopPropagation(); deleteConsole(c.id); }} className="btn btn-danger">DELETE</button>
+                        {user.role === "admin" && (
+                            <div style={styles.actions}>
+                                <Link 
+                                    to={`/consoles/edit/${c.id}`} 
+                                    style={{ ...styles.btn, ...styles.btnPrimary }} 
+                                    onClick={(e) => e.stopPropagation()}
+                                >
+                                    EDIT
+                                </Link>
+                                <button 
+                                    onClick={(e) => { e.stopPropagation(); deleteConsole(c.id); }} 
+                                    style={{ ...styles.btn, ...styles.btnDanger }}
+                                >
+                                    DELETE
+                                </button>
                             </div>
                         )}
                     </div>
                 )) : (
-                    <div className="no-data">
+                    <div style={styles.noData}>
                         <p>Data Belum Tersedia!</p>
                     </div>
                 )}

@@ -21,20 +21,66 @@ export default function ShowGame() {
     };
 
     if (!game) {
-        return <div className="alert alert-danger text-center">Game not found!</div>;
+        return <div>Loading...</div>;
     }
 
+    const styles = {
+        container: {
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexDirection: 'column',
+            marginTop: '50px',
+            marginBottom: '50px',
+        },
+        gameDetail: {
+            display: 'flex',
+            alignItems: 'flex-start',
+            gap: '20px',
+            maxWidth: '800px',
+            width: '100%',
+            padding: '20px',
+            borderRadius: '10px',
+            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+            backgroundColor: '#1f1f1f',
+        },
+        gameImage: {
+            width: '250px',
+            height: 'auto',
+            borderRadius: '8px',
+        },
+        gameInfo: {
+            flex: 1,
+        },
+        backButton: {
+            display: 'inline-block',
+            marginTop: '15px',
+            padding: '10px 15px',
+            backgroundColor: '#1f1f1f',
+            color: 'white',
+            textDecoration: 'none',
+            borderRadius: '10px',
+            border: '1px solid red',
+
+        },
+    };
+
     return (
-        <div className="container mt-5 mb-5">
-            <h2 className="text-center">{game.name}</h2>
-            <div className="game-detail">
-                <img src={`${apiConfig.baseUrl}/storage/${game.image}`} alt={game.name} className="game-image-large" />
-                <div className="game-info">
+        <div style={styles.container}>
+            <h2>{game.name} ({game.console.name})</h2>
+            <div style={styles.gameDetail}>
+                <img
+                    src={`${apiConfig.baseUrl}/storage/${game.image}`}
+                    alt={game.name}
+                    style={styles.gameImage}
+                />
+                <div style={styles.gameInfo}>
+                    <p><strong>Name:</strong> {game.name}</p>
                     <p><strong>Size:</strong> {game.size < 1000 ? `${game.size}MB` : `${(game.size / 1000).toFixed(1)}GB`}</p>
                     <p><strong>Console:</strong> {game.console.name}</p>
                     <p><strong>Genre:</strong> {game.genre.name}</p>
                     <p><strong>Description:</strong> {game.description}</p>
-                    <Link to="/games" className="btn btn-secondary">Back to Games</Link>
+                    <Link to="/games" style={styles.backButton}>Back to Games</Link>
                 </div>
             </div>
         </div>

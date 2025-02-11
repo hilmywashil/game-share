@@ -74,7 +74,33 @@ export default function GameIndex() {
                         </div>
                     ))
                 ) : (
-                    <div className="no-data">Data Belum Tersedia!</div>
+                    //TANPA DATABASE
+                    <div className="game-grid">
+                        <div className="game-card-wrapper">
+                            <Link to={`/games/show/`} className="game-card">
+                                <img src="https://th.bing.com/th/id/OIP.dHd1848s02KLF4bzm6m5zQHaK3?rs=1&pid=ImgDetMain" className="game-image" />
+                                <div className="game-info">
+                                    <h5><strong>Downhill Domination</strong></h5>
+                                    <hr />
+                                    <p><strong>Size:</strong> {formatSize(10000)}</p>
+                                    <p><strong>Console:</strong> PS2</p>
+                                    <p><strong>Genre:</strong> Fighting</p>
+                                </div>
+                            </Link>
+                        </div>
+                        <div className="game-card-wrapper">
+                            <Link to={`/games/show/`} className="game-card">
+                                <img src="https://www.gamereactor.dk/media/66/tekken6_186604b.jpg" className="game-image" />
+                                <div className="game-info">
+                                    <h5><strong>Downhill Domination</strong></h5>
+                                    <hr />
+                                    <p><strong>Size:</strong> {formatSize(10000)}</p>
+                                    <p><strong>Console:</strong> PS2</p>
+                                    <p><strong>Genre:</strong> Fighting</p>
+                                </div>
+                            </Link>
+                        </div>
+                    </div>
                 )}
             </div>
         </div>
@@ -103,7 +129,7 @@ const styles = `
     overflow: hidden;
     text-align: center;
     padding: 10px;
-    max-width: 180px;
+    max-width: 400px;
     width: 100%;
     text-decoration: none;
     color: inherit;
@@ -111,6 +137,11 @@ const styles = `
     display: flex;
     flex-direction: column;
     height: 100%;
+
+}
+
+p {
+    margin-bottom: 2px;
 }
 
 .game-card:hover {

@@ -21,38 +21,93 @@ export default function ConsoleShow() {
     }, [id]);
 
     const formatSize = (size) => {
-        if (size < 1000) {
-            return size + 'MB';
-        }
-        return (size / 1000).toFixed(1) + 'GB';
+        return size < 1000 ? `${size}MB` : `${(size / 1000).toFixed(1)}GB`;
     };
 
     if (!console) {
-        return <div className="console-loading">Loading...</div>;
+        return <div style={{ textAlign: 'center', fontSize: '18px', marginTop: '20px' }}>Loading...</div>;
     }
 
+    const styles = {
+        container: {
+            maxWidth: '800px',
+            margin: '50px auto',
+            padding: '20px',
+            backgroundColor: '#1f1f1f',
+            borderRadius: '10px',
+            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+            textAlign: 'center',
+        },
+        title: {
+            marginBottom: '10px',
+        },
+        gamesList: {
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+            gap: '20px',
+            marginTop: '20px',
+        },
+        gameCard: {
+            padding: '15px',
+            borderRadius: '8px',
+            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+            backgroundColor: '#1f1f1f',
+            textAlign: 'center',
+            cursor: 'pointer',
+        },
+        gameTitle: {
+            fontSize: '16px',
+            marginTop: '10px',
+        },
+        gameDescription: {
+            fontSize: '14px',
+            color: '#666',
+        },
+        button: {
+            display: 'inline-block',
+            marginTop: '10px',
+            padding: '8px 12px',
+            borderRadius: '5px',
+            backgroundColor: '#1f1f1f',
+            border: '2px solid blue',
+            color: 'white',
+            textDecoration: 'none',
+        },
+        backButton: {
+            display: 'block',
+            marginTop: '20px',
+            padding: '10px 15px',
+            backgroundColor: '#1f1f1f',
+            color: 'white',
+            textDecoration: 'none',
+            borderRadius: '5px',
+        },
+        noGames: {
+            fontStyle: 'italic',
+            color: '#888',
+            marginTop: '15px',
+        },
+    };
+
     return (
-        <div className="console-container">
-            <div className="console-detail-card">
-                <h2 className="console-detail-title">{console.name} Game List</h2>
-                <hr />
-                {console.games && console.games.length > 0 ? (
-                    <div className="console-games-list">
-                        {console.games.map(game => (
-                            <div key={game.id} className="console-game-card">
-                                <img src={`${apiConfig.baseUrl}/storage/${game.image}`} alt={game.name} className="console-game-image" />
-                                <h4 className="console-game-title">{game.name}</h4>
-                                <p className="console-game-description"><strong>Size:</strong> {formatSize(game.size)}</p>
-                                <a href={game.link_download} target="_blank" rel="noopener noreferrer" className="console-btn">Download</a>
-                            </div>
-                        ))}
-                    </div>
-                ) : (
-                    <p className="console-no-games">No games available for this console.</p>
-                )}
-                
-                <Link to="/consoles" className="console-btn">Back to List</Link>
-            </div>
+        <div style={styles.container}>
+            <h2 style={styles.title}>{console.name} Game List</h2>
+            <hr />
+            {console.games && console.games.length > 0 ? (
+                <div style={styles.gamesList}>
+                    {console.games.map(game => (
+                        <div key={game.id} style={styles.gameCard}>
+                            <h4 style={styles.gameTitle}>{game.name}</h4>
+                            <p style={styles.gameDescription}><strong>Size:</strong> {formatSize(game.size)}</p>
+                            <Link to={`/games/show/${game.id}`} rel="noopener noreferrer" className="btn btn-lg btn-primary">Detail</Link>
+                        </div>
+                    ))}
+                </div>
+            ) : (
+                <p style={styles.noGames}>No games available for this console.</p>
+            )}
+
+            <Link to="/consoles" style={styles.backButton}>Back to List</Link>
         </div>
     );
 }
