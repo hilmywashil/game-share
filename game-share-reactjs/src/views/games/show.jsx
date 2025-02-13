@@ -6,6 +6,19 @@ import apiConfig from '../../api/apiConfig';
 export default function ShowGame() {
     const { id } = useParams();
     const [game, setGame] = useState(null);
+    const handleDownload = async () => {
+        try {
+            await api.post(`/api/games/${id}/increment-downloads`);
+            setGame(prevGame => ({
+                ...prevGame,
+                downloads: prevGame.downloads + 1
+            }));
+        } catch (error) {
+            console.error('Error incrementing downloads:', error);
+        }
+
+        window.location.href = `${game.link_download}`;
+    };
 
     useEffect(() => {
         fetchGameDetails();
@@ -92,7 +105,13 @@ export default function ShowGame() {
                     <p><strong>Genre:</strong> {game.genre.name}</p>
                     <p><strong>Description:</strong> {game.description}</p>
                     <p><strong>Downloads:</strong> {game.downloads}</p>
-                    <a style={styles.downloadButton} href={`https://${game.link_download}`}>Download</a>
+                    <button
+                        className="btn btn-primary"
+                        style={{ backgroundColor: "#1f1f1f", borderRadius: "10px" }}
+                        onClick={handleDownload}
+                    >
+                        Download
+                    </button>
                     {/* <Link to="/games" style={styles.backButton}>Back to Games</Link> */}
                 </div>
             </div>

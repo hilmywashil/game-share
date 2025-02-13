@@ -3,8 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import api from '../../api';
 import axios from 'axios';
 
-export default function ConsoleIndex() {
-    const [consoles, setConsoles] = useState([]);
+export default function GenreIndex() {
+    const [genres, setGenres] = useState([]);
     const token = localStorage.getItem("token");
     const [user, setUser] = useState({});
 
@@ -19,25 +19,24 @@ export default function ConsoleIndex() {
 
     const navigate = useNavigate();
 
-    const fetchDataConsoles = async () => {
-        await api.get('/api/consoles')
+    const fetchDataGenres = async () => {
+        await api.get('/api/genres')
             .then(response => {
-                setConsoles(response.data.data.data);
+                setGenres(response.data.data.data);
             })
     }
 
     useEffect(() => {
-        fetchDataConsoles();
+        fetchDataGenres();
     }, []);
 
-    const deleteConsole = async (id) => {
-        await api.delete(`/api/consoles/${id}`)
+    const deleteGenre = async (id) => {
+        await api.delete(`/api/genres/${id}`)
             .then(() => {
-                fetchDataConsoles();
+                fetchDataGenres();
             })
     }
 
-    // Styling dalam JS
     const styles = {
         container: {
             maxWidth: '800px',
@@ -103,44 +102,26 @@ export default function ConsoleIndex() {
     return (
         <div style={styles.container}>
             <div style={styles.header}>
-                <h2>Console List</h2>
+                <h2>Genre List</h2>
                 {user.role === "admin" && (
-                    <Link to="/consoles/create" className="btn btn-success" style={{
-                        backgroundColor: "#1f1f1f",
-                        borderRadius: "10px",
-                    }}>ADD NEW CONSOLE</Link>
+                    <Link to="/genres/create" style={{ ...styles.btn, ...styles.btnSuccess }}>ADD NEW CONSOLE</Link>
                 )}
             </div>
             <div style={styles.grid}>
-                {consoles.length > 0 ? consoles.map((c, index) => (
+                {genres.length > 0 ? genres.map((c, index) => (
                     <div
                         key={index}
                         style={styles.card}
-                        onClick={() => navigate(`/consoles/show/${c.id}`)}
+                        onClick={() => navigate(`/genres/show/${c.id}`)}
                         onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
                         onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
                     >
                         <h3>{c.name}</h3>
                         {user.role === "admin" && (
                             <div style={styles.actions}>
-                                <Link
-                                    to={`/consoles/edit/${c.id}`}
-                                    className="btn btn-primary"
-                                    style={{
-                                        backgroundColor: "#1f1f1f",
-                                        borderRadius: "10px",
-                                    }}
-                                    onClick={(e) => e.stopPropagation()}
-                                >
-                                    EDIT
-                                </Link>
                                 <button
-                                    onClick={(e) => { e.stopPropagation(); deleteConsole(c.id); }}
-                                    className="btn btn-danger"
-                                    style={{
-                                        backgroundColor: "#1f1f1f",
-                                        borderRadius: "10px",
-                                    }}
+                                    onClick={(e) => { e.stopPropagation(); deleteGenre(c.id); }}
+                                    style={{ ...styles.btn, ...styles.btnDanger }}
                                 >
                                     DELETE
                                 </button>
@@ -152,7 +133,7 @@ export default function ConsoleIndex() {
                     // <div style={styles.grid}>
                     //     <div
                     //         style={styles.card}
-                    //         onClick={() => navigate(`/consoles/show`)}
+                    //         onClick={() => navigate(`/genres/show`)}
                     //         onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
                     //         onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
                     //     >
@@ -160,7 +141,7 @@ export default function ConsoleIndex() {
                     //     </div>
                     //     <div
                     //         style={styles.card}
-                    //         onClick={() => navigate(`/consoles/show`)}
+                    //         onClick={() => navigate(`/genres/show`)}
                     //         onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
                     //         onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
                     //     >
@@ -168,7 +149,7 @@ export default function ConsoleIndex() {
                     //     </div>
                     //     <div
                     //         style={styles.card}
-                    //         onClick={() => navigate(`/consoles/show`)}
+                    //         onClick={() => navigate(`/genres/show`)}
                     //         onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
                     //         onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
                     //     >
@@ -176,7 +157,7 @@ export default function ConsoleIndex() {
                     //     </div>
                     //     <div
                     //         style={styles.card}
-                    //         onClick={() => navigate(`/consoles/show`)}
+                    //         onClick={() => navigate(`/genres/show`)}
                     //         onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
                     //         onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
                     //     >

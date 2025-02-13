@@ -92,6 +92,15 @@ function Login() {
                                         LOGIN
                                     </button>
                                 </div>
+                                <br></br>
+                                <div className="d-grid gap-2">
+                                    <a href={'/register'} className="btn btn-success p-2"
+                                        style={{
+                                            backgroundColor: "#1f1f1f",
+                                            borderRadius: "10px",
+                                        }}
+                                    >Doesn't have an account? Click me to Register!</a>
+                                </div>
                             </form>
                         </div>
                     </div>

@@ -9,20 +9,23 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Exception;
+
 class GameController extends Controller
 {
     public function index()
     {
         try {
-            $games = Game::with(['publisher', 'genre', 'console'])->paginate(10);
+            $games = Game::with(['publisher', 'genre', 'console'])->paginate();
             return response()->json([
                 'success' => true,
+                'message' => 'All Game List',
                 'data' => $games
             ]);
         } catch (Exception $e) {
             return response()->json([
-                'success' => true,
-                'message' => 'Failed'
+                'success' => false,
+                'message' => 'Failed',
+                'error' => $e->getMessage()
             ]);
         }
     }
@@ -73,7 +76,7 @@ class GameController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Validasi gagal',
-                'errors' => $e->errors()
+                'errors' => $e->getMessage()
             ], 422);
         } catch (Exception $e) {
             return response()->json([
@@ -158,8 +161,18 @@ class GameController extends Controller
                 'error' => $e->getMessage(),
             ]);
         }
-
     }
+
+    public function incrementDownloads($id)
+    {
+        $game = Game::findOrFail($id);
+        $game->downloads += 1;
+        $game->save();
+
+        return response()->json(['message' => 'Downloads updated successfully', 'downloads' => $game->downloads]);
+    }
+
+
     public function destroy($id)
     {
         $game = Game::find($id);

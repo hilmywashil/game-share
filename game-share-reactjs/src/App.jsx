@@ -45,6 +45,16 @@ export default function App() {
                   CONSOLE
                 </Link>
               </li>
+              <li className="nav-item">
+                <Link to="/publishers" className="nav-link">
+                  PUBLISHER
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/genres" className="nav-link">
+                  GENRE
+                </Link>
+              </li>
             </ul>
 
             {/* Instagram Button */}

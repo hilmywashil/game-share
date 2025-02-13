@@ -3,8 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import api from '../../api';
 import axios from 'axios';
 
-export default function ConsoleIndex() {
-    const [consoles, setConsoles] = useState([]);
+export default function PublisherIndex() {
+    const [publishers, setPublishers] = useState([]);
     const token = localStorage.getItem("token");
     const [user, setUser] = useState({});
 
@@ -19,25 +19,24 @@ export default function ConsoleIndex() {
 
     const navigate = useNavigate();
 
-    const fetchDataConsoles = async () => {
-        await api.get('/api/consoles')
+    const fetchDataPublishers = async () => {
+        await api.get('/api/publishers')
             .then(response => {
-                setConsoles(response.data.data.data);
+                setPublishers(response.data.data.data);
             })
     }
 
     useEffect(() => {
-        fetchDataConsoles();
+        fetchDataPublishers();
     }, []);
 
-    const deleteConsole = async (id) => {
-        await api.delete(`/api/consoles/${id}`)
+    const deletePublisher = async (id) => {
+        await api.delete(`/api/publishers/${id}`)
             .then(() => {
-                fetchDataConsoles();
+                fetchDataPublishers();
             })
     }
 
-    // Styling dalam JS
     const styles = {
         container: {
             maxWidth: '800px',
@@ -103,20 +102,17 @@ export default function ConsoleIndex() {
     return (
         <div style={styles.container}>
             <div style={styles.header}>
-                <h2>Console List</h2>
+                <h2>Publisher List</h2>
                 {user.role === "admin" && (
-                    <Link to="/consoles/create" className="btn btn-success" style={{
-                        backgroundColor: "#1f1f1f",
-                        borderRadius: "10px",
-                    }}>ADD NEW CONSOLE</Link>
+                    <Link to="/publishers/create" style={{ ...styles.btn, ...styles.btnSuccess }}>ADD NEW CONSOLE</Link>
                 )}
             </div>
             <div style={styles.grid}>
-                {consoles.length > 0 ? consoles.map((c, index) => (
+                {publishers.length > 0 ? publishers.map((c, index) => (
                     <div
                         key={index}
                         style={styles.card}
-                        onClick={() => navigate(`/consoles/show/${c.id}`)}
+                        onClick={() => navigate(`/publishers/show/${c.id}`)}
                         onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
                         onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
                     >
@@ -124,23 +120,15 @@ export default function ConsoleIndex() {
                         {user.role === "admin" && (
                             <div style={styles.actions}>
                                 <Link
-                                    to={`/consoles/edit/${c.id}`}
-                                    className="btn btn-primary"
-                                    style={{
-                                        backgroundColor: "#1f1f1f",
-                                        borderRadius: "10px",
-                                    }}
+                                    to={`/publishers/edit/${c.id}`}
+                                    style={{ ...styles.btn, ...styles.btnPrimary }}
                                     onClick={(e) => e.stopPropagation()}
                                 >
                                     EDIT
                                 </Link>
                                 <button
-                                    onClick={(e) => { e.stopPropagation(); deleteConsole(c.id); }}
-                                    className="btn btn-danger"
-                                    style={{
-                                        backgroundColor: "#1f1f1f",
-                                        borderRadius: "10px",
-                                    }}
+                                    onClick={(e) => { e.stopPropagation(); deletePublisher(c.id); }}
+                                    style={{ ...styles.btn, ...styles.btnDanger }}
                                 >
                                     DELETE
                                 </button>
@@ -152,7 +140,7 @@ export default function ConsoleIndex() {
                     // <div style={styles.grid}>
                     //     <div
                     //         style={styles.card}
-                    //         onClick={() => navigate(`/consoles/show`)}
+                    //         onClick={() => navigate(`/publishers/show`)}
                     //         onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
                     //         onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
                     //     >
@@ -160,7 +148,7 @@ export default function ConsoleIndex() {
                     //     </div>
                     //     <div
                     //         style={styles.card}
-                    //         onClick={() => navigate(`/consoles/show`)}
+                    //         onClick={() => navigate(`/publishers/show`)}
                     //         onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
                     //         onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
                     //     >
@@ -168,7 +156,7 @@ export default function ConsoleIndex() {
                     //     </div>
                     //     <div
                     //         style={styles.card}
-                    //         onClick={() => navigate(`/consoles/show`)}
+                    //         onClick={() => navigate(`/publishers/show`)}
                     //         onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
                     //         onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
                     //     >
@@ -176,7 +164,7 @@ export default function ConsoleIndex() {
                     //     </div>
                     //     <div
                     //         style={styles.card}
-                    //         onClick={() => navigate(`/consoles/show`)}
+                    //         onClick={() => navigate(`/publishers/show`)}
                     //         onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
                     //         onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
                     //     >

@@ -138,7 +138,10 @@ export default function GameIndex() {
             <div style={styles.header}>
                 <h2>All Game List</h2>
                 {user.role === "admin" && (
-                    <Link to="/games/create" style={{ ...styles.btn, ...styles.btnSuccess }}>ADD NEW GAME</Link>
+                    <Link to="/games/create" className="btn btn-success" style={{
+                        backgroundColor: "#1f1f1f",
+                        borderRadius: "10px",
+                    }}>ADD NEW GAME</Link>
                 )}
             </div>
             <div style={styles.grid}>
@@ -162,8 +165,14 @@ export default function GameIndex() {
                             </div>
                             {user.role === "admin" && (
                                 <div style={styles.actions}>
-                                    <Link to={`/games/edit/${g.id}`} style={{ ...styles.btn, ...styles.btnPrimary }}>EDIT</Link>
-                                    <button onClick={() => deleteGame(g.id)} style={{ ...styles.btn, ...styles.btnDanger }}>DELETE</button>
+                                    <Link to={`/games/edit/${g.id}`} className="btn btn-primary" style={{
+                                        backgroundColor: "#1f1f1f",
+                                        borderRadius: "10px"
+                                    }}>EDIT</Link>
+                                    <button className="btn btn-danger" onClick={() => deleteGame(g.id)} style={{
+                                        backgroundColor: "#1f1f1f",
+                                        borderRadius: "10px",
+                                    }}>DELETE</button>
                                 </div>
                             )}
                         </div>

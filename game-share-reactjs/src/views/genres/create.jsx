@@ -6,7 +6,7 @@ import api from '../../api';
 
 import axios from 'axios';
 
-export default function GameCreate() {
+export default function GenreCreate() {
 
     const token = localStorage.getItem("token");
     const fetchDataToken = async () => {
@@ -23,17 +23,17 @@ export default function GameCreate() {
 
     const navigate = useNavigate();
 
-    const storeConsole = async (e) => {
+    const storeGenre = async (e) => {
         e.preventDefault();
 
         const formData = new FormData();
 
         formData.append('name', name);
 
-        await api.post('/api/consoles', formData)
+        await api.post('/api/genres', formData)
             .then(() => {
 
-                navigate('/consoles');
+                navigate('/genres');
 
             })
             .catch(error => {
@@ -48,15 +48,15 @@ export default function GameCreate() {
                 <div className="col-md-12">
                     <div className="card border-0 rounded shadow">
                         <div className="card-body">
-                            <form onSubmit={storeConsole}>
+                            <form onSubmit={storeGenre}>
 
                                 <div className="mb-3">
                                     <label className="form-label fw-bold">Name</label>
-                                    <input type="text" className="form-control" onChange={(e) => setName(e.target.value)} placeholder="Console Name" />
+                                    <input type="text" className="form-control" onChange={(e) => setName(e.target.value)} placeholder="Genre Name" />
                                     {
                                         errors.name && (
                                             <div className="alert alert-danger mt-2">
-                                                Nama Console tidak boleh kosong!
+                                                Nama Genre tidak boleh kosong!
                                             </div>
                                         )
                                     }

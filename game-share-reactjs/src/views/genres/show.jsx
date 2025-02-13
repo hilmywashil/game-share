@@ -3,28 +3,28 @@ import { useParams, Link } from 'react-router-dom';
 import apiConfig from '../../api/apiConfig';
 import api from '../../api';
 
-export default function ConsoleShow() {
+export default function GenreShow() {
     const { id } = useParams();
-    const [console, setConsole] = useState(null);
+    const [genre, setGenre] = useState(null);
 
     useEffect(() => {
-        const fetchConsole = async () => {
-            await api.get(`/api/consoles/${id}`)
+        const fetchGenre = async () => {
+            await api.get(`/api/genres/${id}`)
                 .then(response => {
-                    setConsole(response.data.data);
+                    setGenre(response.data.data);
                 })
                 .catch(error => {
-                    console.error("Error fetching console data", error);
+                    console.error("Error fetching genre data", error);
                 });
         };
-        fetchConsole();
+        fetchGenre();
     }, [id]);
 
     const formatSize = (size) => {
         return size < 1000 ? `${size}MB` : `${(size / 1000).toFixed(1)}GB`;
     };
 
-    if (!console) {
+    if (!genre) {
         return <div style={{ textAlign: 'center', fontSize: '18px', marginTop: '20px' }}>Loading...</div>;
     }
 
@@ -55,6 +55,12 @@ export default function ConsoleShow() {
             textAlign: 'center',
             cursor: 'pointer',
         },
+        gameImage: {
+            width: '100%',
+            height: 'auto',
+            aspectRatio: '2/3',
+            borderRadius: '5px',
+        },
         gameTitle: {
             fontSize: '16px',
             marginTop: '10px',
@@ -63,15 +69,15 @@ export default function ConsoleShow() {
             fontSize: '14px',
             color: '#666',
         },
-        button: {
+        detailButton: {
             display: 'inline-block',
-            marginTop: '10px',
-            padding: '8px 12px',
-            borderRadius: '5px',
+            marginTop: '15px',
+            padding: '10px 15px',
             backgroundColor: '#1f1f1f',
-            border: '2px solid blue',
             color: 'white',
             textDecoration: 'none',
+            borderRadius: '10px',
+            border: '1px solid #cc6ce7',
         },
         backButton: {
             display: 'block',
@@ -87,47 +93,28 @@ export default function ConsoleShow() {
             color: '#888',
             marginTop: '15px',
         },
-        detailButton: {
-            display: 'inline-block',
-            marginTop: '15px',
-            padding: '10px 15px',
-            backgroundColor: '#1f1f1f',
-            color: 'white',
-            textDecoration: 'none',
-            borderRadius: '10px',
-            border: '1px solid #cc6ce7',
-
-        },
-
     };
 
     return (
         <div style={styles.container}>
-            <h2 style={styles.title}>{console.name} Game List</h2>
+            <h2 style={styles.title}>{genre.name} Game List</h2>
             <hr />
-            {console.games && console.games.length > 0 ? (
+            {genre.games && genre.games.length > 0 ? (
                 <div style={styles.gamesList}>
-                    {console.games.map(game => (
+                    {genre.games.map(game => (
                         <div key={game.id} style={styles.gameCard}>
+                            <img src={`${apiConfig.baseUrl}/storage/${game.image}`} alt={game.name} style={styles.gameImage} />
                             <h4 style={styles.gameTitle}>{game.name}</h4>
                             <p style={styles.gameDescription}><strong>Size:</strong> {formatSize(game.size)}</p>
-                            <Link to={`/games/show/${game.id}`} className="btn btn-primary" rel="noopener noreferrer" style={{
-                                backgroundColor: "#1f1f1f",
-                                borderRadius: "10px",
-                            }}>Detail</Link>
+                            <Link to={`/games/show/${game.id}`} rel="noopener noreferrer" style={styles.detailButton}>Detail</Link>
                         </div>
                     ))}
                 </div>
             ) : (
-                <p style={styles.noGames}>No games available for this console.</p>
+                <p style={styles.noGames}>No games available for this genre.</p>
             )}
-            <br />
-            <Link to="/consoles"
-                className="btn btn-danger"
-                style={{
-                    backgroundColor: "#1f1f1f",
-                    borderRadius: "10px",
-                }}>Back to List</Link>
+
+            <Link to="/genres" style={styles.backButton}>Back to List</Link>
         </div>
     );
 }

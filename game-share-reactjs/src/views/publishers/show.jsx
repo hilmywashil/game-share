@@ -3,28 +3,28 @@ import { useParams, Link } from 'react-router-dom';
 import apiConfig from '../../api/apiConfig';
 import api from '../../api';
 
-export default function ConsoleShow() {
+export default function PublisherShow() {
     const { id } = useParams();
-    const [console, setConsole] = useState(null);
+    const [publisher, setPublisher] = useState(null);
 
     useEffect(() => {
-        const fetchConsole = async () => {
-            await api.get(`/api/consoles/${id}`)
+        const fetchPublisher = async () => {
+            await api.get(`/api/publishers/${id}`)
                 .then(response => {
-                    setConsole(response.data.data);
+                    setPublisher(response.data.data);
                 })
                 .catch(error => {
-                    console.error("Error fetching console data", error);
+                    publisher.error("Error fetching publisher data", error);
                 });
         };
-        fetchConsole();
+        fetchPublisher();
     }, [id]);
 
     const formatSize = (size) => {
         return size < 1000 ? `${size}MB` : `${(size / 1000).toFixed(1)}GB`;
     };
 
-    if (!console) {
+    if (!publisher) {
         return <div style={{ textAlign: 'center', fontSize: '18px', marginTop: '20px' }}>Loading...</div>;
     }
 
@@ -98,36 +98,28 @@ export default function ConsoleShow() {
             border: '1px solid #cc6ce7',
 
         },
-
+        
     };
 
     return (
         <div style={styles.container}>
-            <h2 style={styles.title}>{console.name} Game List</h2>
+            <h2 style={styles.title}>{publisher.name} Game List</h2>
             <hr />
-            {console.games && console.games.length > 0 ? (
+            {publisher.games && publisher.games.length > 0 ? (
                 <div style={styles.gamesList}>
-                    {console.games.map(game => (
+                    {publisher.games.map(game => (
                         <div key={game.id} style={styles.gameCard}>
                             <h4 style={styles.gameTitle}>{game.name}</h4>
                             <p style={styles.gameDescription}><strong>Size:</strong> {formatSize(game.size)}</p>
-                            <Link to={`/games/show/${game.id}`} className="btn btn-primary" rel="noopener noreferrer" style={{
-                                backgroundColor: "#1f1f1f",
-                                borderRadius: "10px",
-                            }}>Detail</Link>
+                            <Link to={`/games/show/${game.id}`} rel="noopener noreferrer" style={styles.detailButton}>Detail</Link>
                         </div>
                     ))}
                 </div>
             ) : (
-                <p style={styles.noGames}>No games available for this console.</p>
+                <p style={styles.noGames}>No games available for this publisher.</p>
             )}
-            <br />
-            <Link to="/consoles"
-                className="btn btn-danger"
-                style={{
-                    backgroundColor: "#1f1f1f",
-                    borderRadius: "10px",
-                }}>Back to List</Link>
+
+            <Link to="/publishers" style={styles.backButton}>Back to List</Link>
         </div>
     );
 }

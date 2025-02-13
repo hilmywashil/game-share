@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import api from '../../api';
 
-export default function ConsoleEdit() {
+export default function PublisherEdit() {
 
     const [name, setName] = useState('');
 
@@ -14,9 +14,9 @@ export default function ConsoleEdit() {
 
     const { id } = useParams();
 
-    const fetchDetailConsole = async () => {
+    const fetchDetailPublisher = async () => {
 
-        await api.get(`/api/consoles/${id}`)
+        await api.get(`/api/publishers/${id}`)
             .then(response => {
 
                 setName(response.data.data.name);
@@ -25,11 +25,11 @@ export default function ConsoleEdit() {
 
     useEffect(() => {
 
-        fetchDetailConsole();
+        fetchDetailPublisher();
 
     }, []);
 
-    const updateConsole = async (e) => {
+    const updatePublisher = async (e) => {
         e.preventDefault();
 
         const formData = new FormData();
@@ -37,10 +37,10 @@ export default function ConsoleEdit() {
         formData.append('name', name);
         formData.append('_method', 'PUT')
 
-        await api.post(`/api/consoles/${id}`, formData)
+        await api.post(`/api/publishers/${id}`, formData)
             .then(() => {
 
-                navigate('/consoles');
+                navigate('/publishers');
 
             })
             .catch(error => {
@@ -55,7 +55,7 @@ export default function ConsoleEdit() {
                 <div className="col-md-12">
                     <div className="card border-0 rounded shadow">
                         <div className="card-body">
-                            <form onSubmit={updateConsole}>
+                            <form onSubmit={updatePublisher}>
                                 <div className="mb-3">
                                     <label className="form-label fw-bold">Update Name</label>
                                     <input type="text" className="form-control" value={name} onChange={(e) => setName(e.target.value)} placeholder="Title Post" />

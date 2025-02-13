@@ -49,6 +49,7 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
 //Game
 Route::get('games', [GameController::class, 'index']);
 Route::get('games/{id}', [GameController::class, 'show']);
+Route::post('/games/{id}/increment-downloads', [GameController::class, 'incrementDownloads']);
 Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::post('games', [GameController::class, 'store']);
     Route::put('games/{id}', [GameController::class, 'update']);
