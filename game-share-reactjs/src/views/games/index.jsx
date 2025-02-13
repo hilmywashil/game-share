@@ -126,6 +126,11 @@ export default function GameIndex() {
             backgroundColor: '#28a745',
             color: 'white',
         },
+
+        marginP: {
+            marginBottom: "5px",
+        },
+
         noData: {
             textAlign: 'center',
             fontStyle: 'italic',
@@ -158,9 +163,9 @@ export default function GameIndex() {
                                 <div style={styles.info}>
                                     <h5><strong>{g.name}</strong></h5>
                                     <hr />
-                                    <p><strong>Size:</strong> {formatSize(g.size)}</p>
-                                    <p><strong>Console:</strong> {g.console.name}</p>
-                                    <p><strong>Genre:</strong> {g.genre.name}</p>
+                                    <p style={styles.marginP}><strong>Size:</strong> {formatSize(g.size)}</p>
+                                    <p style={styles.marginP}><strong>Console:</strong> {g.console.name}</p>
+                                    <p style={styles.marginP}><strong>Downloads:</strong> {g.downloads ?? 0}</p>
                                 </div>
                             </div>
                             {user.role === "admin" && (

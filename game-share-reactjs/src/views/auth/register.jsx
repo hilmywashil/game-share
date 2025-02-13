@@ -33,78 +33,79 @@ function Register() {
   };
 
   const handleBack = () => {
-    navigate("/dashboard"); // Navigate to the root path
+    navigate("/");
   };
 
   return (
-    <div className="container" style={{ marginTop: "120px" }}>
+    <div className="container" style={{ marginTop: "100px" }}>
       <div className="row justify-content-center">
-        <div className="col-md-6 col-lg-4">
-          <div className="card border-0 rounded shadow-lg p-4" style={{ backgroundColor: "#f9f9f9" }}>
+        <div className="col-md-5">
+          <div className="card border-0 rounded shadow-lg" style={{ backgroundColor: "#1f1f1f", padding: "30px" }}>
             <div className="card-body">
-              <h4 className="fw-bold text-center" style={{ color: "#007bff" }}>REGISTER</h4>
+              <h3 className="fw-bold text-center" style={{ color: "white" }}>Register ( Coming Soon )</h3>
               <hr />
+              {validation.message && (
+                <div className="alert alert-danger text-center">
+                  {validation.message}
+                </div>
+              )}
               <form onSubmit={registerHandler}>
-                <div className="mb-3">
-                  <label className="form-label fw-bold">NAME</label>
+                <div className="mb-4">
+                  <label className="form-label fw-bold">Name</label>
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control p-3"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder="Enter Name"
-                    style={{ borderRadius: "10px", border: "1px solid #007bff" }}
+                    placeholder="Enter your name"
                   />
-                  {validation.name && (
-                    <div className="alert alert-danger mt-2" style={{ fontSize: "14px" }}>
-                      {validation.name[0]}
-                    </div>
-                  )}
                 </div>
+                {validation.name && (
+                  <div className="alert alert-danger">
+                    {validation.name[0]}
+                  </div>
+                )}
 
-                <div className="mb-3">
-                  <label className="form-label fw-bold">EMAIL</label>
+                <div className="mb-4">
+                  <label className="form-label fw-bold">Email</label>
                   <input
                     type="email"
-                    className="form-control"
+                    className="form-control p-3"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter Email"
-                    style={{ borderRadius: "10px", border: "1px solid #007bff" }}
+                    placeholder="Enter your email"
                   />
-                  {validation.email && (
-                    <div className="alert alert-danger mt-2" style={{ fontSize: "14px" }}>
-                      {validation.email[0]}
-                    </div>
-                  )}
                 </div>
+                {validation.email && (
+                  <div className="alert alert-danger">
+                    {validation.email[0]}
+                  </div>
+                )}
 
-                <div className="mb-3">
-                  <label className="form-label fw-bold">PASSWORD</label>
+                <div className="mb-4">
+                  <label className="form-label fw-bold">Password</label>
                   <input
                     type="password"
-                    className="form-control"
+                    className="form-control p-3"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Set Password"
-                    style={{ borderRadius: "10px", border: "1px solid #007bff" }}
+                    placeholder="Enter your password"
                   />
-                  {validation.password && (
-                    <div className="alert alert-danger mt-2" style={{ fontSize: "14px" }}>
-                      {validation.password[0]}
-                    </div>
-                  )}
                 </div>
+                {validation.password && (
+                  <div className="alert alert-danger">
+                    {validation.password[0]}
+                  </div>
+                )}
 
-                <div className="mb-3">
-                  <label className="form-label fw-bold">CONFIRM PASSWORD</label>
+                <div className="mb-4">
+                  <label className="form-label fw-bold">Confirm Password</label>
                   <input
                     type="password"
-                    className="form-control"
+                    className="form-control p-3"
                     value={passwordConfirmation}
                     onChange={(e) => setPasswordConfirmation(e.target.value)}
-                    placeholder="Confirm Password"
-                    style={{ borderRadius: "10px", border: "1px solid #007bff" }}
+                    placeholder="Confirm your password"
                   />
                 </div>
 
@@ -113,16 +114,22 @@ function Register() {
                     type="submit"
                     className="btn btn-primary p-3"
                     style={{
-                      backgroundColor: "#007bff",
+                      backgroundColor: "#1f1f1f",
                       borderRadius: "10px",
                       fontWeight: "bold",
-                      transition: "background-color 0.3s",
                     }}
-                    onMouseOver={(e) => e.target.style.backgroundColor = "#0056b3"}
-                    onMouseOut={(e) => e.target.style.backgroundColor = "#007bff"}
                   >
                     REGISTER
                   </button>
+                </div>
+                <br />
+                <div className="d-grid gap-2">
+                  <a href={'/login'} className="btn btn-success p-2"
+                    style={{
+                      backgroundColor: "#1f1f1f",
+                      borderRadius: "10px",
+                    }}
+                  >Already have an account? Click me to Login!</a>
                 </div>
               </form>
             </div>
@@ -130,23 +137,22 @@ function Register() {
         </div>
       </div>
 
+      {/* Floating Back Button */}
       <button
         onClick={handleBack}
         style={{
-          position: "fixed",
-          bottom: "20px",
-          left: "20px",
-          padding: "10px 20px",
-          backgroundColor: "#007bff",
-          color: "white",
-          border: "none",
-          borderRadius: "30px",
-          cursor: "pointer",
-          boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-          transition: "background-color 0.3s",
+          position: 'fixed',
+          bottom: '20px',
+          left: '20px',
+          padding: '10px 20px',
+          backgroundColor: '#1f1f1f',
+          color: 'white',
+          border: 'none',
+          borderRadius: '30px',
+          cursor: 'pointer',
+          boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
+          transition: 'background-color 0.3s',
         }}
-        onMouseOver={(e) => e.target.style.backgroundColor = "#0056b3"}
-        onMouseOut={(e) => e.target.style.backgroundColor = "#007bff"}
       >
         Back
       </button>

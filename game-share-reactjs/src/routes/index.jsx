@@ -34,6 +34,7 @@ import Register from '../views/auth/register.jsx';
 import Dashboard from '../views/auth/dashboard.jsx';
 import Unauthorized from "../views/auth/unauthorized.jsx";
 import AuthAdminCheck from "./AuthAdminCheck.jsx";
+import Profile from "../views/auth/profile.jsx";
 
 function RoutesIndex() {
     return (
@@ -68,6 +69,7 @@ function RoutesIndex() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/profile" element={<Profile />} />
             <Route path="/unauthorized" element={<Unauthorized />} />
 
         </Routes>

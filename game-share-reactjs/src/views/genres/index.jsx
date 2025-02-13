@@ -104,7 +104,10 @@ export default function GenreIndex() {
             <div style={styles.header}>
                 <h2>Genre List</h2>
                 {user.role === "admin" && (
-                    <Link to="/genres/create" style={{ ...styles.btn, ...styles.btnSuccess }}>ADD NEW CONSOLE</Link>
+                    <Link to="/genres/create" className="btn btn-success" style={{
+                        backgroundColor: "#1f1f1f",
+                        borderRadius: "10px",
+                    }}>ADD NEW GENRE</Link>
                 )}
             </div>
             <div style={styles.grid}>
@@ -121,7 +124,11 @@ export default function GenreIndex() {
                             <div style={styles.actions}>
                                 <button
                                     onClick={(e) => { e.stopPropagation(); deleteGenre(c.id); }}
-                                    style={{ ...styles.btn, ...styles.btnDanger }}
+                                    className="btn btn-danger"
+                                    style={{
+                                        backgroundColor: "#1f1f1f",
+                                        borderRadius: "10px",
+                                    }}
                                 >
                                     DELETE
                                 </button>

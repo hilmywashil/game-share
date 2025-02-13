@@ -7,6 +7,15 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * Class User
+ *
+ * @property string $name
+ * @property string $email
+ * @property string|null $profile_photo
+ * @property string $role
+ * @mixin \Illuminate\Database\Eloquent\Model
+ */
 class User extends Authenticatable
 {
     use HasApiTokens, Notifiable, HasFactory;
@@ -16,6 +25,7 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
+        'profile_photo',
     ];
 
     protected $hidden = [
@@ -23,13 +33,11 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
-    }
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
+
     public function isAdmin(): bool
     {
         return $this->role === 'admin';

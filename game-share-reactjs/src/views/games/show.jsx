@@ -34,7 +34,7 @@ export default function ShowGame() {
     };
 
     if (!game) {
-        return <div>Loading...</div>;
+        return <div style={{ textAlign: 'center', fontSize: '18px', marginTop: '20px' }}>Loading...</div>;
     }
 
     const styles = {

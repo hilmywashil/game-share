@@ -104,7 +104,10 @@ export default function PublisherIndex() {
             <div style={styles.header}>
                 <h2>Publisher List</h2>
                 {user.role === "admin" && (
-                    <Link to="/publishers/create" style={{ ...styles.btn, ...styles.btnSuccess }}>ADD NEW CONSOLE</Link>
+                    <Link to="/publishers/create" className="btn btn-success" style={{
+                        backgroundColor: "#1f1f1f",
+                        borderRadius: "10px",
+                    }}>ADD NEW PUBLISHER</Link>
                 )}
             </div>
             <div style={styles.grid}>
@@ -121,14 +124,22 @@ export default function PublisherIndex() {
                             <div style={styles.actions}>
                                 <Link
                                     to={`/publishers/edit/${c.id}`}
-                                    style={{ ...styles.btn, ...styles.btnPrimary }}
+                                    className="btn btn-primary"
+                                    style={{
+                                        backgroundColor: "#1f1f1f",
+                                        borderRadius: "10px",
+                                    }}
                                     onClick={(e) => e.stopPropagation()}
                                 >
                                     EDIT
                                 </Link>
                                 <button
                                     onClick={(e) => { e.stopPropagation(); deletePublisher(c.id); }}
-                                    style={{ ...styles.btn, ...styles.btnDanger }}
+                                    className="btn btn-danger"
+                                    style={{
+                                        backgroundColor: "#1f1f1f",
+                                        borderRadius: "10px",
+                                    }}
                                 >
                                     DELETE
                                 </button>

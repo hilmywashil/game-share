@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('description')->nullable();
             $table->integer('size');
-            $table->date('release_date');
             $table->foreignId('publisher_id')->references('id')->on('publishers')->onUpdate('cascade');
             $table->foreignId('genre_id')->references('id')->on('genres');
             $table->foreignId('console_id')->references('id')->on('consoles')->onUpdate('cascade');
