@@ -15,9 +15,15 @@ use App\Http\Controllers\Api\UserController;
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
-Route::middleware('auth:sanctum')->post('/user/update-photo', [ProfileController::class, 'updatePhoto']);
 
-
+//Upload Photo
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/user/update', [ProfileController::class, 'updateProfile']);
+    Route::middleware('auth:sanctum')->post('/user/update-photo', [ProfileController::class, 'updateProfilePhoto']);
+    Route::middleware('auth:sanctum')->post('/user/cover-photo', [ProfileController::class, 'updateCoverPhoto']);
+    Route::post('/profile/delete-photo', [ProfileController::class, 'deleteProfilePhoto']);
+    Route::post('/profile/delete-cover', [ProfileController::class, 'deleteCoverPhoto']);
+});
 
 //Auth
 Route::post('register', RegisterController::class);
