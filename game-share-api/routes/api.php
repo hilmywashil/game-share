@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Api\ProfileController;
+use App\Http\Controllers\Api\UserController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -22,6 +23,7 @@ Route::middleware('auth:sanctum')->post('/user/update-photo', [ProfileController
 Route::post('register', RegisterController::class);
 Route::post('login', LoginController::class);
 Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
+Route::get('/users', [UserController::class, 'index']);
 
 //Publisher
 Route::get('publishers', [PublisherController::class, 'index']);

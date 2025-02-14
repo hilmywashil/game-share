@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import api from '../../api';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 export default function Profile() {
     const token = localStorage.getItem("token");
@@ -31,7 +32,12 @@ export default function Profile() {
 
     const handleUpload = async () => {
         if (!profilePhoto) {
-            alert("Please select an image first!");
+            Swal.fire({
+                title: "Error!",
+                text: "Masukan foto profil untuk melanjutkan!",
+                icon: "warning",
+                confirmButtonText: "Coba Lagi",
+            });
             return;
         }
 
@@ -41,13 +47,25 @@ export default function Profile() {
         await api.post('/api/user/update-photo', formData)
             .then(() => {
 
-                navigate('/dashboard');
+                Swal.fire({
+                    title: "Success!",
+                    text: "Foto Profil berhasil ditambahkan!",
+                    icon: "success",
+                    confirmButtonText: "Konfirmasi"
+                }).then(() => {
+                    navigate('/dashboard');
+                });
 
             })
-            .catch(error => {
-
-                setErrors(error.response.data);
-            })
+            .catch((error) => {
+                setValidation(error.response.data);
+                Swal.fire({
+                    title: "Error!",
+                    text: error.response.data.message || "Login gagal!",
+                    icon: "error",
+                    confirmButtonText: "Coba Lagi"
+                });
+            });
     };
 
     return (

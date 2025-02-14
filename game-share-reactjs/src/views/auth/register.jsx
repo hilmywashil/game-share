@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 function Register() {
   const [name, setName] = useState("");
@@ -25,7 +26,16 @@ function Register() {
       .then((response) => {
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('user', JSON.stringify(response.data.user));
-        navigate('/dashboard');
+
+        Swal.fire({
+          title: "Sukses Register!",
+          text: "Login untuk melanjutkan",
+          icon: "success",
+          confirmButtonText: "Lanjutkan"
+        }).then(() => {
+          navigate('/login');
+        })
+
       })
       .catch((error) => {
         setValidation(error.response.data);
@@ -57,7 +67,11 @@ function Register() {
                     className="form-control p-3"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder="Enter your name"
+                    style={{
+                      backgroundColor: "#1f1f1f",
+                      color: "white",
+                      border: "1px solid #444"
+                    }}
                   />
                 </div>
                 {validation.name && (
@@ -73,8 +87,12 @@ function Register() {
                     className="form-control p-3"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your email"
-                  />
+                    style={{
+                      backgroundColor: "#1f1f1f",
+                      color: "white",
+                      border: "1px solid #444"
+                  }}
+/>
                 </div>
                 {validation.email && (
                   <div className="alert alert-danger">
@@ -89,8 +107,12 @@ function Register() {
                     className="form-control p-3"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Enter your password"
-                  />
+                    style={{
+                      backgroundColor: "#1f1f1f",
+                      color: "white",
+                      border: "1px solid #444"
+                  }}
+/>
                 </div>
                 {validation.password && (
                   <div className="alert alert-danger">
@@ -105,8 +127,11 @@ function Register() {
                     className="form-control p-3"
                     value={passwordConfirmation}
                     onChange={(e) => setPasswordConfirmation(e.target.value)}
-                    placeholder="Confirm your password"
-                  />
+                    style={{
+                      backgroundColor: "#1f1f1f",
+                      color: "white",
+                      border: "1px solid #444"
+                  }}/>
                 </div>
 
                 <div className="d-grid gap-2">
@@ -123,13 +148,8 @@ function Register() {
                   </button>
                 </div>
                 <br />
-                <div className="d-grid gap-2">
-                  <a href={'/login'} className="btn btn-success p-2"
-                    style={{
-                      backgroundColor: "#1f1f1f",
-                      borderRadius: "10px",
-                    }}
-                  >Already have an account? Click me to Login!</a>
+                <div>
+                  <strong> Sudah Punya akun?<a href={'/login'}> Login</a></strong>
                 </div>
               </form>
             </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 function Login() {
     const [email, setEmail] = useState("");
@@ -24,10 +25,24 @@ function Login() {
             .then((response) => {
                 localStorage.setItem('token', response.data.token);
                 localStorage.setItem('user', JSON.stringify(response.data.user));
-                navigate('/dashboard');
+
+                Swal.fire({
+                    title: "Success!",
+                    text: "Login berhasil!",
+                    icon: "success",
+                    confirmButtonText: "Konfirmasi"
+                }).then(() => {
+                    navigate('/dashboard');
+                });
             })
             .catch((error) => {
                 setValidation(error.response.data);
+                Swal.fire({
+                    title: "Error!",
+                    text: "Login gagal!",
+                    icon: "error",
+                    confirmButtonText: "Coba Lagi"
+                });
             });
     };
 
@@ -41,7 +56,7 @@ function Login() {
                 <div className="col-md-5">
                     <div className="card border-0 rounded shadow-lg" style={{ backgroundColor: "#1f1f1f", padding: "30px" }}>
                         <div className="card-body">
-                            <h3 className="fw-bold text-center" style={{ color: "white" }}>Login ( Coming Soon )</h3>
+                            <h3 className="fw-bold text-center" style={{ color: "white" }}>Login</h3>
                             <hr />
                             {validation.message && (
                                 <div className="alert alert-danger text-center">
@@ -56,7 +71,11 @@ function Login() {
                                         className="form-control p-3"
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
-                                        placeholder="Enter your email"
+                                        style={{
+                                            backgroundColor: "#1f1f1f",
+                                            color: "white",
+                                            border: "1px solid #444"
+                                        }}
                                     />
                                 </div>
                                 {validation.email && (
@@ -71,7 +90,11 @@ function Login() {
                                         className="form-control p-3"
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
-                                        placeholder="Enter your password"
+                                        style={{
+                                            backgroundColor: "#1f1f1f",
+                                            color: "white",
+                                            border: "1px solid #444"
+                                        }}
                                     />
                                 </div>
                                 {validation.password && (
@@ -92,14 +115,9 @@ function Login() {
                                         LOGIN
                                     </button>
                                 </div>
-                                <br></br>
-                                <div className="d-grid gap-2">
-                                    <a href={'/register'} className="btn btn-success p-2"
-                                        style={{
-                                            backgroundColor: "#1f1f1f",
-                                            borderRadius: "10px",
-                                        }}
-                                    >Doesn't have an account? Click me to Register!</a>
+                                <br />
+                                <div>
+                                    <strong> Gapunya akun?<a href={'/register'}> Register</a></strong>
                                 </div>
                             </form>
                         </div>
