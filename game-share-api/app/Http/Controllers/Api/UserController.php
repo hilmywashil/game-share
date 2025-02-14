@@ -12,7 +12,7 @@ class UserController extends Controller
     public function index()
     {
         try {
-            $users = User::all();
+            $users = User::latest()->paginate();
             return response()->json([
                 'success' => true,
                 'message' => 'List User',

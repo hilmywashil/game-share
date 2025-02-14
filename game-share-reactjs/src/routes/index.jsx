@@ -36,6 +36,8 @@ import Unauthorized from "../views/auth/unauthorized.jsx";
 import AuthAdminCheck from "./AuthAdminCheck.jsx";
 import EditProfile from "../views/auth/EditProfile.jsx";
 
+import UserIndex from "../views/auth/users.jsx";
+
 function RoutesIndex() {
     return (
         <Routes>
@@ -71,6 +73,7 @@ function RoutesIndex() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/edit-profile" element={<EditProfile />} />
             <Route path="/unauthorized" element={<Unauthorized />} />
+            <Route path="/users" element={<AuthAdminCheck><UserIndex /></AuthAdminCheck>} />
 
         </Routes>
     )
